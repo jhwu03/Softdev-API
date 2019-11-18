@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create Account</title>
+    </head>
+    <body>
+        {% with errors = get_flashed_messages() %}
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endwith %}
+        <form method="GET">
+            <label>Enter Username</label>
+            <input type="text" name="username">
+            <br>
+            <label>Enter Password</label>
+            <input type="password" name="passwordNew">
+            <br>
+            <label> Enter Password Again: </label>
+            <input type="password" name="passwordRepeat">
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        <form action = "/login">
+            <input type = "submit" value = "Return to Login">
+        </form>
+    </body>
+</html>
