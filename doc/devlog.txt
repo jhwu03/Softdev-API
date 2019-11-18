@@ -3,3 +3,9 @@ DEVLOG for Burgers and Fries
 wuJ -- 2019-11-14 9:23
 created GitHub repository
 discussed possible ideas for site
+
+huangP -- 2019-11-18 1:42
+Updated design doc:
+  - fixed component map to declutter country page and add logout button
+  - explained the use of alpha-2 and alpha-3 code and how they're not redundant
+  - fixed sitemap
