@@ -13,3 +13,7 @@ Updated design doc:
 
 avrahamiB -- 2019-11-18 17:21
 Copied over login mechanism from previous project
+
+chenE -- 2019-11-19 09:21
+Copied over login mechanism from previous project
+Added app.py with routes that lead to login, create-acct, and home
