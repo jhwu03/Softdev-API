@@ -1,4 +1,5 @@
 DEVLOG for Burgers and Fries
+**reminder(When any team member stops working and pushes changes to github, they should update the devlog explaining what changes have been made. Include errors/bugs discovered or created )
 
 wuJ -- 2019-11-14 9:23
 created GitHub repository
