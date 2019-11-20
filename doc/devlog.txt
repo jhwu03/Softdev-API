@@ -34,3 +34,6 @@ Procedures/protocols we will observe to make more awesome
   - test and debug each other people’s code (round robin style because people begin internalizing the code)
   - ask for help when needed and don’t shame the person asking
   - keep code organized and readable by other people (comments! and PEP styling)
+
+huangP -- 2019-11-20 12:48
+Added requirements.txt and tested it in new virtual environment.
