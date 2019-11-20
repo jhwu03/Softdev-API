@@ -30,6 +30,7 @@ def verify_login(username, password):
     cur.execute("SELECT * FROM users WHERE user_name = ? AND user_password = ?;" , (username, password,))
     if cur.fetchone() is None:
         message = "Login credentials not found! Please try again."
+    close_db(database)
     return message
 
 def convert_currency(curr_1, value, curr_2):
