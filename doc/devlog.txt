@@ -28,3 +28,9 @@ updated readme
 huangP -- 2019-11-19 20:58
 Wrote db_builder.py to initiate tables in the database if it does not already exist.
 Wrote the functions in db_manager that is required for login system.
+
+huangP -- 2019-11-20 9:08
+Procedures/protocols we will observe to make more awesome
+  - test and debug each other people’s code (round robin style because people begin internalizing the code)
+  - ask for help when needed and don’t shame the person asking
+  - keep code organized and readable by other people (comments! and PEP styling)
