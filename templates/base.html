@@ -11,6 +11,8 @@
       </title>
   </head>
   <body>
+    {% block prebody %}
+    {% endblock %}
     {% with errors = get_flashed_messages() %}
       <ul>
         {% for error in errors %}
