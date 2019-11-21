@@ -59,8 +59,9 @@ avrahamiB -- 2019-11-21 9:25
 Made login page look slightly fancier, started adding css and other features
 Started quiz page
 
-huangP -- 2019-11-21 13:03
+huangP -- 2019-11-21 14:48
 Finished all of the database functions.
 Add two new database functions and updated the list of functions on design doc:
   - found_country(country) sets a country's found value to 1
   - get_found_countries() returns a dictionary with the keys being the regions of the world and values as the countries found in each region
+Update instructions to run the project on README
