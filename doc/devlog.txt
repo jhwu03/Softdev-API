@@ -25,6 +25,9 @@ added important reminder for members
 wuJ -- 2019-11-19 9:27
 updated readme
 
+avrahamiB -- 2019-11-19 18:00
+Added jinja inheritance to html files
+
 huangP -- 2019-11-19 20:58
 Wrote db_builder.py to initiate tables in the database if it does not already exist.
 Wrote the functions in db_manager that is required for login system.
@@ -51,3 +54,7 @@ Updated database:
   - wrote and merge get_alpha_3 and get_alpha_2 together into get_alpha to prevent writing duplicate code
 Updated design doc:
   - The changes made above to database (shortening table name and merging alpha-2 and alpha-3 functions) have been reflected in design doc
+
+avrahamiB -- 2019-11-21 9:25
+Made login page look slightly fancier, started adding css and other features
+Started quiz page
