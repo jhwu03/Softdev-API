@@ -1,4 +1,5 @@
 import sqlite3
+from db_builder import exec_cmd
 
 DB_FILE = "database.db"
 
@@ -12,9 +13,9 @@ def add_login(username, password):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
     message = ""
-    cur.execute("SELECT * FROM users WHERE user_name = ?;", (username,))
+    cur.execute("SELECT * FROM users WHERE username = ?;", (username,))
     if cur.fetchone() is None:
-        cur.execute("INSERT INTO users(user_name, user_password) VALUES(?, ?);",
+        cur.execute("INSERT INTO users(username, password) VALUES(?, ?);",
                     (username, password,))
     else:
         message = "Username already exists!"
@@ -27,7 +28,8 @@ def verify_login(username, password):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
     message = ""
-    cur.execute("SELECT * FROM users WHERE user_name = ? AND user_password = ?;" , (username, password,))
+    cur.execute("SELECT * FROM users WHERE username = ? AND password = ?;",
+                (username, password,))
     if cur.fetchone() is None:
         message = "Login credentials not found! Please try again."
     close_db(database)
@@ -37,7 +39,7 @@ def convert_currency(curr_1, value, curr_2):
     return ""
 
 def reset_quiz():
-    return ""
+    exec_cmd("UPDATE countries SET found = 0;")
 
 def get_name_stats(name, country):
     return ""
@@ -48,14 +50,20 @@ def has_name(name, country):
 def add_name(name, country, count, age):
     return ""
 
-def get_alpha_2(country):
-    return ""
+def get_alpha(country, type):
+    database = sqlite3.connect(DB_FILE)
+    cur = database.cursor()
+    cur.execute("SELECT alpha_" + type + " FROM countries WHERE name = ?;", (country,))
+    ans = cur.fetchone()[0]
+    close_db(database)
+    return ans
 
-def get_alpha_3(country):
-    return ""
-
-def has_currency(country_1, country_2):
-    return ""
+def has_currency(currency_1, currency_2):
+    database = sqlite3.connect(DB_FILE)
+    cur = database.cursor()
+    cur.execute("SELECT * FROM currency WHERE currency_1 = ? AND currency_2 = ?",
+                (currency_1, currency_2,))
+    return cur.fetchall() != None
 
 def add_currency(currency_1, currency_2, rate):
     return ""
