@@ -37,3 +37,8 @@ Procedures/protocols we will observe to make more awesome
 
 huangP -- 2019-11-20 12:48
 Added requirements.txt and tested it in new virtual environment.
+
+wuJ -- 2019-11-20 20:54
+Procedures/protocols we will observe to make more awesome(additionals to Devo Peihua's list)
+  - accept comments from others and improve from those comments rather than attempting to disprove them
+  - have checkups and deadlines to keep track of progress
