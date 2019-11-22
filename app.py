@@ -20,6 +20,10 @@ def root():
     #if user is logged in,
         return redirect(url_for("home"))
         # redirect to homepage
+    u = urllib.request.urlopen("https://restcountries.eu/rest/v2/" + country.replace(" ", "%20"))
+    response = u.read()
+    data = json.loads(response)
+    return render_template("countries.html", name = data[0]['name'], alpha= data[0]['alpha2Code'], pop = data[0]['population'])
     return redirect(url_for("login"))
     # else, redirect to login page
 
@@ -126,21 +130,34 @@ def countries():
         # redirect to login page
     if ("country_2" in request.args):
         #made a request to change currencies
-        return redirect(url_for("countries.html"))
-    country = request.args["country"]
-    if (db_manager.has_country(country)):
         return render_template("countries.html")
+    country = request.args["country"]
+    if (db_manager.has_stat(country)):
+        stats = db_manager.get_stat(country)
+        return render_template("countries.html", stats = stats)
     else:
-        try:
-            u = urllib.request.urlopen("https://restcountries.eu/rest/v2/name/" + country.replace(" ", "%20"))
-            response = u.read()
-            data = json.loads(response)
-            return render_template("countries.html", name = data[0]['name'], alpha= data[0]['alpha2Code'], pop = data[0]['population'])
-        except:
-            return redirect(url_for("root"))
-    return render_template("countries.html", name = "", alpha= "", pop = "")
-    name_stats = db_manager.get_name_stats()
-    return render_template("countries.html")
+        #if the stats are not in the database, then access the api
+        u = urllib.request.urlopen("https://restcountries.eu/rest/v2/name/" + country.replace(" ", "%20"))
+        response = u.read()
+        data = json.loads(response)
+        #stats is a dictionary of values containing: calling codes, capital, population, languages, flag, currency, and region
+        stats = dict()
+        stats['callingCodes'] = data[0]['callingCodes']
+        stats['cap'] = data[0]['capital']
+        stats['pop'] = data[0]['population']
+        #the languages field is given as a list of languages in the api
+        list_of_languages = data[0]['languages']
+        languages = []
+        #goes through the list of languages and retrieve the names of the languages
+        for language in list_of_languages:
+            languages.append(language['name'])
+        stats['languages'] = languages
+        stats['flag'] = data[0]['flag']
+        #goes through the list of the information given by the currrency and retrieve only the name of the currency
+        stats['currency'] = data[0]['currencies'][0]['name']
+        stats['reg'] = data[0]['region']
+        db_manager.add_stat(country, stats['callingCodes'], stats['cap'], stats['pop'], stats['languages'], stats['flag'], stats['currency'], stats['reg'])
+        return render_template("countries.html", stats = stats)
 
 
 @app.route("/logout")
