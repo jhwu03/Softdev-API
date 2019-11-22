@@ -1,6 +1,6 @@
 # All About Countries by Burgers and Fries
 This is a website all about countries!
-In addition to info on every country in the world, there is also a currency converter and werid facts section.
+In addition to info on every country in the world, there is also a currency converter and weird facts section.
 After you've learned about these countries, test your knowledge with our quiz!
 
 ### Roster:
