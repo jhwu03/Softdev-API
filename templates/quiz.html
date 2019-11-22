@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block css %}
+{% endblock %}
+{% block title %}
+  Country Quiz!
+{% endblock %}
+{% block body %}
+  <form action="/quiz">
+    Country:
+    <input type="text" name="country">
+    <input type="submit" value="Check" name="check">
+  </form>
+  <table class="table">
+    <thead>
+      <th scope="col">Country</th>
+      <th scope="col">Continent</th>
+    </thead>
+{% endblock %}
