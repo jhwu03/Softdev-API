@@ -187,3 +187,20 @@ def get_found_countries():
         oceania.append(row[0])
     return {"Africa": africa, "Americas": americas,
             "Asia": asia, "Europe": europe, "Oceania": oceania}
+
+def get_country_stat(country):
+    database = sqlite3.connect(DB_FILE)
+    cur = database.cursor()
+    cur.execute("""SELECT stat.name, alpha_2, alpha_3, calling_code, capital,
+                population, lang, flag, currency, region FROM countries, stat
+                WHERE stat.name = ? AND countries.name = ?;""",
+                (country, country,))
+    data = {}
+    row = cur.fetchone()
+    if row is not None:
+        data = {"name": row[0], "alpha_2": row[1], "alpha_3": row[2],
+                "calling_code": row[3], "capital": row[4],
+                "population": row[5], "language": row[6], "flag": row[7],
+                "currency": row[7], "region":row[8]}
+    close_db(database)
+    return data
