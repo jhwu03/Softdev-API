@@ -126,16 +126,16 @@ def countries():
         #made a request to change currencies
     country = request.args["country"]
     if (db_manager.has_country(country)):
-
+        return render_template("countries.html")
     else:
         try:
             u = urllib.request.urlopen("https://restcountries.eu/rest/v2/name/" + country.replace(" ", "%20"))
             response = u.read()
             data = json.loads(response)
-            return render_template("index.html", name = data[0]['name'], alpha= data[0]['alpha2Code'], pop = data[0]['population'])
+            return render_template("countries.html", name = data[0]['name'], alpha= data[0]['alpha2Code'], pop = data[0]['population'])
         except:
             return redirect(url_for("root"))
-    return render_template("index.html", name = "", alpha= "", pop = "")
+    return render_template("countries.html", name = "", alpha= "", pop = "")
     name_stats = db_manager.get_name_stats()
     return render_template("countries.html")
 
