@@ -95,3 +95,6 @@ Bug found (to be fixed):
 
 huangP -- 2019-11-22 08:52
 Put stylesheet in static to fix linking issues
+
+wuJ -- 2019-11-21 9:24
+updated README to prevent any confusions with installation
