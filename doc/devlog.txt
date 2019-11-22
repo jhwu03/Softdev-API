@@ -92,3 +92,6 @@ Debugged:
 Bug found (to be fixed):
   - in /country, the variable country is sometimes used before it's defined
   - also in /country, unclear whether country is alpha-2 code or country name (both instances are used)
+
+huangP -- 2019-11-22 08:52
+Put stylesheet in static to fix linking issues
