@@ -8,7 +8,7 @@ from flask import session
 from flask import flash
 import urllib.request, json
 # import flask functions
-from data import db_manager, db_builder
+from utl import db_manager, db_builder
 # import database functions
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
@@ -90,6 +90,7 @@ def create_account():
     # render create-account.html template
 
 @app.route("/home")
+def home():
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
@@ -99,6 +100,7 @@ def create_account():
     return render_template("home.html", username=user)
 
 @app.route("/search")
+def lookup():
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
@@ -124,7 +126,7 @@ def countries():
         # redirect to login page
     if ("country_2" in request.args):
         #made a request to change currencies
-    country = request.args["country"]
+        country = request.args["country"]
     if (db_manager.has_country(country)):
         return render_template("countries.html")
     else:
