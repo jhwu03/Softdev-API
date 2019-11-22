@@ -6,6 +6,7 @@ from flask import redirect
 from flask import url_for
 from flask import session
 from flask import flash
+import urllib.request, json
 # import flask functions
 from data import db_manager, db_builder
 # import database functions
@@ -97,12 +98,42 @@ def create_account():
     #user is set to the person logged in
     return render_template("home.html", username=user)
 
+@app.route("/search")
+    if "username" not in session:
+    # if user is not logged in,
+        return redirect(url_for("login"))
+        # redirect to login page
+    keyword = request.args["keyword"]
+    results = db_manager.search_country(keyword)
+    return render_template("results.html", results = results)
+
+
 @app.route("/quiz")
 def quiz():
+    if "username" not in session:
+    # if user is not logged in,
+        return redirect(url_for("login"))
+        # redirect to login page
+
     return render_template("quiz.html")
 
 @app.route("/countries")
 def countries():
+    if "username" not in session:
+    # if user is not logged in,
+        return redirect(url_for("login"))
+        # redirect to login page
+    if ("country_2" in request.args):
+        #made a request to change currencies
+    country = request.args["country"]
+    if (db_manager.has_country(country)):
+
+    else:
+        u = urllib.request.urlopen("https://restcountries.eu/rest/v2/name/" + country.replace(" ", "%20"))
+        response = u.read()
+        data = json.loads(response)
+        
+    name_stats = db_manager.get_name_stats()
     return render_template("countries.html")
 
 
