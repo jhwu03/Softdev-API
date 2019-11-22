@@ -90,6 +90,7 @@ def create_account():
     # render create-account.html template
 
 @app.route("/home")
+def home():
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
@@ -99,6 +100,7 @@ def create_account():
     return render_template("home.html", username=user)
 
 @app.route("/search")
+def search():
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
@@ -124,6 +126,7 @@ def countries():
         # redirect to login page
     if ("country_2" in request.args):
         #made a request to change currencies
+        return redirect(url_for("countries.html"))
     country = request.args["country"]
     if (db_manager.has_country(country)):
         return render_template("countries.html")
