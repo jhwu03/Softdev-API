@@ -109,7 +109,7 @@ def add_currency(currency_1, currency_2, rate):
                     (currency_1, 1, currency_2, rate,))
         close_db(database)
 
-def has_country(country):
+def has_stat(country):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
     cur.execute("SELECT * FROM stat WHERE name = ?;",
@@ -118,14 +118,32 @@ def has_country(country):
     close_db(database)
     return data != None
 
-def add_country(country, calling_code, cap, pop, lang, flag, curr, reg):
-    if not has_country(country):
+def add_stat(country, calling_code, cap, pop, lang, flag, curr, reg):
+    if not has_stat(country):
         database = sqlite3.connect(DB_FILE)
         cur = database.cursor()
         cur.execute("""INSERT INTO stat(name, calling_code, capital, population,
                                         lang, flag, currency, region)
                        VALUES(?, ?, ?, ?, ?, ?, ?, ?);""",
                     (country, calling_code, cap, pop, lang, flag, curr, reg))
+        close_db(database)
+
+def has_country(country):
+    database = sqlite3.connect(DB_FILE)
+    cur = database.cursor()
+    cur.execute("SELECT * FROM countries WHERE name = ?;",
+                (country,))
+    data = cur.fetchone()
+    close_db(database)
+    return data != None
+
+def add_country(country, alpha_2, alpha_3):
+    if not has_country(country):
+        database = sqlite3.connect(DB_FILE)
+        cur = database.cursor()
+        cur.execute("""INSERT INTO countries(name, alpha_2, alpha_3, found)
+                       VALUES(?, ?, ?, ?);""",
+                    (country, alpha_2, alpha_3, 0))
         close_db(database)
 
 def search_country(keyword):
