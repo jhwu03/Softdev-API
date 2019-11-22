@@ -1,27 +1,26 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-    </head>
-    <body>
-        {% with errors = get_flashed_messages() %}
-            <ul>
-                {% for error in errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endwith %}
-        <form method = "GET">
-            <label>Username</label>
-            <input type = "text" name = "username">
-            <br>
-            <label>Password</label>
-            <input type = "password" name = "password">
-            <br>
-            <input type = "submit" value = "Log in">
-        </form>
-        <form action = "/create-acc">
-            <input type = "submit" value = "Create Account">
-        </form>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block css %}
+  <link rel="stylesheet" href="styles.css">
+{% endblock %}
+{% block title %}
+  Login
+{% endblock %}
+{% block body %}
+  <div id="bothforms">
+    <h1>Login</h1>
+    <br>
+    <br>
+    <form method = "GET">
+      <label>Username</label>
+      <input type = "text" name = "username">
+      <br>
+      <label>Password</label>
+      <input type = "password" name = "password">
+      <br>
+      <input type = "submit" value = "Log in">
+    </form>
+    <form action = "/create-acc">
+      <input type = "submit" value = "Create Account">
+    </form>
+  </div>
+{% endblock %}
