@@ -20,20 +20,19 @@ After you've learned about these countries, test your knowledge with our quiz!
 
 
 ### How to run this project
-1. Clone and change into our repository:
+1. To ensure that we're running on the same package versions, run it with a virtual environment with the following commands:
+   ```
+   python3 -m venv <name of vitrual environment>    # creates a virtual environment named <name of virtual environment>
+   .<name of vitrual environment>/bin/activate      # activates the virtual environment
+   ```
+2. Clone and change into our repository:
    ```
    git clone https://github.com/jhwu03/Softdev-API.git
    cd Softdev-API/
    ```
-2. Install all the needed packages using the following command in a terminal: <br>
+3. Install all the needed packages using the following command in a terminal: <br>
    ```
    pip3 install -r doc/requirements.txt
-   ```
-3. If pip command is restricted, run it with a virtual environment with the following commands:
-   ```
-   python3 -m venv <name of vitrual environment>    # creates a virtual environment named <name of virtual environment>
-   .<name of vitrual environment>/bin/activate      # activates the virtual environment
-   pip3 install -r doc/requirements.txt             # installs all the packages needed
    ```
 4. Once all the packages are install, run the project:
    ```
