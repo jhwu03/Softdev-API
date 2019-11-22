@@ -73,10 +73,12 @@ Update instructions to run the project on README
 wuJ -- 2019-11-21 20:50
 Added hyperlinks for each API in the README
 
-huangP -- 2019-11-21 21:11
+huangP -- 2019-11-21 21:48
 Merged api_backend with master branch
 Added wheel to requirements.txt and tested it on new virtual environment
 Made sure login mechanism and homepage are fully functioning. (Other routes do not crash but are mostly empty)
+Updated route names on design doc
+Removed Maps Static API from README and design doc because it costs money per request
 Debugged:
   Flask app:
     - removed unnecessary error messages since database functions already returns it
