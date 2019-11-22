@@ -61,7 +61,7 @@ Started quiz page
 
 wuJ -- 2019-11-21 9:27
 updated README with API and instructions on how to run
-still need to add hyperlinks to each api
+still need to add hyperlinks to each API
 
 huangP -- 2019-11-21 14:48
 Finished all of the database functions.
@@ -70,4 +70,5 @@ Add two new database functions and updated the list of functions on design doc:
   - get_found_countries() returns a dictionary with the keys being the regions of the world and values as the countries found in each region
 Update instructions to run the project on README
 
-
+wuJ -- 2019-11-21 20:50
+Added hyperlinks for each API in the README
