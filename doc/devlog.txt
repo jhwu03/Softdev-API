@@ -72,6 +72,7 @@ Update instructions to run the project on README
 
 wuJ -- 2019-11-21 20:50
 Added hyperlinks for each API in the README
+we need Wheel in requirements.txt
 
 huangP -- 2019-11-21 21:48
 Merged api_backend with master branch
