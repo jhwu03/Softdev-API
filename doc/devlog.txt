@@ -2,7 +2,7 @@ DEVLOG for Burgers and Fries
 
 **REMINDER**(When any team member stops working and pushes changes to github, they should update the devlog explaining what changes have been made. Include errors/bugs discovered or created )
 
-wuJ -- 2019-11-14 09:23
+wuJ -- 2019-11-14 9:23
 created GitHub repository
 discussed possible ideas for site
 
@@ -18,15 +18,11 @@ Copied over login mechanism from previous project
 huangP -- 2019-11-18 21:35
 Updated design doc to show Bootstrap as the frontend framework being used
 
-wuJ -- 2019-11-19 09:15
+wuJ -- 2019-11-19 9:15
 Fixed submodules for the final time(hopefully)
 added important reminder for members
 
-chenE -- 2019-11-19 09:21
-Copied over login mechanism from previous project
-Added app.py with routes that lead to login, create-acc, and home
-
-wuJ -- 2019-11-19 09:27
+wuJ -- 2019-11-19 9:27
 updated readme
 
 avrahamiB -- 2019-11-19 18:00
@@ -36,7 +32,7 @@ huangP -- 2019-11-19 20:58
 Wrote db_builder.py to initiate tables in the database if it does not already exist.
 Wrote the functions in db_manager that is required for login system.
 
-huangP -- 2019-11-20 09:08
+huangP -- 2019-11-20 9:08
 Procedures/protocols we will observe to make more awesome
   - test and debug each other people’s code (round robin style because people begin internalizing the code)
   - ask for help when needed and don’t shame the person asking
@@ -46,7 +42,7 @@ huangP -- 2019-11-20 12:48
 Added requirements.txt and tested it in new virtual environment.
 
 wuJ -- 2019-11-20 20:54
-Procedures/protocols we will observe to make more awesome(additions to Devo Peihua's list)
+Procedures/protocols we will observe to make more awesome(additionals to Devo Peihua's list)
   - accept comments from others and improve from those comments rather than attempting to disprove them
   - have checkups and deadlines to keep track of progress
 
@@ -59,9 +55,13 @@ Updated database:
 Updated design doc:
   - The changes made above to database (shortening table name and merging alpha-2 and alpha-3 functions) have been reflected in design doc
 
-avrahamiB -- 2019-11-21 09:25
+avrahamiB -- 2019-11-21 9:25
 Made login page look slightly fancier, started adding css and other features
 Started quiz page
+
+wuJ -- 2019-11-21 9:27
+updated README with API and instructions on how to run
+still need to add hyperlinks to each api
 
 huangP -- 2019-11-21 14:48
 Finished all of the database functions.
@@ -69,3 +69,5 @@ Add two new database functions and updated the list of functions on design doc:
   - found_country(country) sets a country's found value to 1
   - get_found_countries() returns a dictionary with the keys being the regions of the world and values as the countries found in each region
 Update instructions to run the project on README
+
+
