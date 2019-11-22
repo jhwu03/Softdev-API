@@ -1,5 +1,5 @@
 # All About Countries by Burgers and Fries
-This is a website all about countries! 
+This is a website all about countries!
 In addition to info on every country in the world, there is also a currency converter and werid facts section.
 After you've learned about these countries, test your knowledge with our quiz!
 
@@ -11,11 +11,10 @@ After you've learned about these countries, test your knowledge with our quiz!
 
 <br>
 
-### APIs required:
+### APIs required (no keys needed!!!):
 - [REST Countries](https://docs.google.com/document/d/1aQRi7FIILs_x3RE5i65KHuuy49Rt05ZqERKqZjOGiJw/edit) - basic info about countries
 - [Currency Exchange](https://docs.google.com/document/d/1yTckLoGBHA-C37hhukXOc76Jh_770L7m3Moj-wMFeUU/edit) - exchange rates between base country and other countries on record
 - [Open Trivia](https://docs.google.com/document/d/1yp2nicOExDYlrEfdvqspD17Kz5c-xMSWHudfmNjJgQ4/edit) - list of trivia questions (may be implemented if time allows)
-- [Maps Static](https://docs.google.com/document/d/1PSbtpMU8EAC7g0QzXqPPTxnfLIukKCiTU2J-_-tf9IU/edit) - customized image from google maps
 - [UNdata](https://docs.google.com/document/d/1RUMsyU0gyltsdWV6Uwzzf_RHC0sg9F6sL8zZbKQM9yc/edit) - information on growth, pollution, and health indicators that the UN uses
 - [Agify.io](https://docs.google.com/document/d/1_YHaU-HXpDXaBDa3xPbGl2P9yBmzjuxKakyp4LRwow4/edit) - number people and average age of a person with a given name in a given country
 
