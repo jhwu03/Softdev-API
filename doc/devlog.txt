@@ -25,6 +25,9 @@ added important reminder for members
 wuJ -- 2019-11-19 9:27
 updated readme
 
+avrahamiB -- 2019-11-19 18:00
+Added jinja inheritance to html files
+
 huangP -- 2019-11-19 20:58
 Wrote db_builder.py to initiate tables in the database if it does not already exist.
 Wrote the functions in db_manager that is required for login system.
@@ -37,3 +40,28 @@ Procedures/protocols we will observe to make more awesome
 
 huangP -- 2019-11-20 12:48
 Added requirements.txt and tested it in new virtual environment.
+
+wuJ -- 2019-11-20 20:54
+Procedures/protocols we will observe to make more awesome(additionals to Devo Peihua's list)
+  - accept comments from others and improve from those comments rather than attempting to disprove them
+  - have checkups and deadlines to keep track of progress
+
+huangP -- 2019-11-20 22:09
+Updated database:
+  - shortened table names to make coding easier
+  - fixed the functions that add and verify login because the column headers in the query string did not match with the table
+  - wrote has_currency and reset_quiz
+  - wrote and merge get_alpha_3 and get_alpha_2 together into get_alpha to prevent writing duplicate code
+Updated design doc:
+  - The changes made above to database (shortening table name and merging alpha-2 and alpha-3 functions) have been reflected in design doc
+
+avrahamiB -- 2019-11-21 9:25
+Made login page look slightly fancier, started adding css and other features
+Started quiz page
+
+huangP -- 2019-11-21 14:48
+Finished all of the database functions.
+Add two new database functions and updated the list of functions on design doc:
+  - found_country(country) sets a country's found value to 1
+  - get_found_countries() returns a dictionary with the keys being the regions of the world and values as the countries found in each region
+Update instructions to run the project on README
