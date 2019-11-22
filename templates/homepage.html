@@ -9,9 +9,14 @@
     <a class="navbar-brand">Burgers and Fries</a>
     <ul class="nav navbar-nav ml-auto">
       <li>
-        <form class="form-inline" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline" action="/search" method="GET">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
           <button type="submit" class="btn">Search</button>
+        </form>
+      </li>
+      <li>
+        <form action="/logout" method="GET">
+          <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
         </form>
       </li>
     </ul>

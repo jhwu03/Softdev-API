@@ -1,5 +1,5 @@
 import sqlite3
-from db_builder import exec_cmd
+from utl import db_builder
 
 DB_FILE = "database.db"
 
@@ -49,7 +49,7 @@ def convert_currency(curr_1, value, curr_2):
     return value * rate[0]
 
 def reset_quiz():
-    exec_cmd("UPDATE countries SET found = 0;")
+    db_builder.exec_cmd("UPDATE countries SET found = 0;")
 
 def get_name_stats(name, country):
     database = sqlite3.connect(DB_FILE)

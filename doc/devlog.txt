@@ -72,3 +72,21 @@ Update instructions to run the project on README
 
 wuJ -- 2019-11-21 20:50
 Added hyperlinks for each API in the README
+
+huangP -- 2019-11-21 21:11
+Merged api_backend with master branch
+Added wheel to requirements.txt and tested it on new virtual environment
+Made sure login mechanism and homepage are fully functioning. (Other routes do not crash but are mostly empty)
+Debugged:
+  Flask app:
+    - removed unnecessary error messages since database functions already returns it
+    - changed naming convention to match that in design doc
+    - fixed python file to conform to PEP
+  Database:
+    - fixed importing to work with flask app
+  Templates:
+    - added a logout button to homepage
+    - added blank country.html and results.html to be worked on by Ben
+Bug found (to be fixed):
+  - in /country, the variable country is sometimes used before it's defined
+  - also in /country, unclear whether country is alpha-2 code or country name (both instances are used)
