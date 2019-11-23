@@ -27,6 +27,7 @@ updated readme
 
 avrahamiB -- 2019-11-19 18:00
 Added jinja inheritance to html files
+Created basic file system; put at least a blank html file to render each planned page
 
 huangP -- 2019-11-19 20:58
 Wrote db_builder.py to initiate tables in the database if it does not already exist.
@@ -57,7 +58,9 @@ Updated design doc:
 
 avrahamiB -- 2019-11-21 9:25
 Made login page look slightly fancier, started adding css and other features
+Put in alerts from Bootstrap if any errors are flashed
 Started quiz page
+Waiting to make more substantial contributions until flask app is running
 
 wuJ -- 2019-11-21 9:27
 updated README with API and instructions on how to run
@@ -93,9 +96,18 @@ Debugged:
 Bug found (to be fixed):
   - in /country, the variable country is sometimes used before it's defined
   - also in /country, unclear whether country is alpha-2 code or country name (both instances are used)
+  
+avrahamiB -- 2019-11-21 22:50
+Put in navbar from Bootstrap at the top of the homepage
+Made the search button right-aligned
 
 huangP -- 2019-11-22 08:52
 Put stylesheet in static to fix linking issues
 
-wuJ -- 2019-11-21 9:24
+wuJ -- 2019-11-22 9:24
 updated README to prevent any confusions with installation
+
+avrahamiB -- 2019-11-22 21:24
+Added map as background to the homepage
+Put background behind instructions so they could still be seen
+Made background opaque so the map could still be seen
