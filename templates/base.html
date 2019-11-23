@@ -9,11 +9,13 @@
       {% endblock %}
       </title>
   </head>
-  <body>
+  {% block bodyformat %}
+  <body style="padding-left: 50px;">
+  {% endblock %}
     {% block prebody %}
     {% endblock %}
     {% with errors = get_flashed_messages() %}
-      <ul>
+      <ul style="list-style: none;">
         {% for error in errors %}
           <li>
             <div class="alert alert-danger">
