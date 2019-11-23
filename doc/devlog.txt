@@ -96,7 +96,7 @@ Debugged:
 Bug found (to be fixed):
   - in /country, the variable country is sometimes used before it's defined
   - also in /country, unclear whether country is alpha-2 code or country name (both instances are used)
-  
+
 avrahamiB -- 2019-11-21 22:50
 Put in navbar from Bootstrap at the top of the homepage
 Made the search button right-aligned
@@ -111,3 +111,11 @@ avrahamiB -- 2019-11-22 21:24
 Added map as background to the homepage
 Put background behind instructions so they could still be seen
 Made background opaque so the map could still be seen
+
+huangP -- 2019-11-22 22:36
+Added functions to database manager:
+  - add_stat(country) to add stats for the country if it is not in the database
+  - has_stat(country) to check if stats for country is in database
+  - get_country_stat(country) to get all the stats for a country as a dictionary
+Added to db_build in database builder to fill countries table if it is still empty when Flask app starts
+Renamed stylesheet to match the href in homepage template

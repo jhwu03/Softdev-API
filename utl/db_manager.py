@@ -201,6 +201,6 @@ def get_country_stat(country):
         data = {"name": row[0], "alpha_2": row[1], "alpha_3": row[2],
                 "calling_code": row[3], "capital": row[4],
                 "population": row[5], "language": row[6], "flag": row[7],
-                "currency": row[7], "region":row[8]}
+                "currency": row[8], "region":row[9]}
     close_db(database)
     return data
