@@ -10,11 +10,13 @@ def exec_cmd(command):
     database.close()
 
 def add_regions(region):
-    u = urllib.request.urlopen("https://restcountries.eu/rest/v2/region/" + region + "?fields=name;alpha2Code;alpha3Code")
+    u = urllib.request.urlopen("https://restcountries.eu/rest/v2/region/" +
+                               region + "?fields=name;alpha2Code;alpha3Code")
     response = u.read()
     data = json.loads(response)
     for row in data:
-        db_manager.add_country(row['name'], row['alpha2Code'], row['alpha3Code'])
+        if not db_manager.has_country(row['name']):
+            db_manager.add_country(row['name'], row['alpha2Code'], row['alpha3Code'])
 
 def db_build():
     exec_cmd("CREATE TABLE IF NOT EXISTS users(username TEXT UNIQUE, password TEXT);")

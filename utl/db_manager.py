@@ -1,4 +1,5 @@
 import sqlite3
+import urllib.request, json
 from utl import db_builder
 
 DB_FILE = "database.db"
@@ -160,37 +161,45 @@ def search_country(keyword):
 def found_country(country):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("UPDATE countries SET found = 0 WHERE name = ?;", (country,))
+    cur.execute("UPDATE countries SET found = 1 WHERE name = ?;", (country,))
+    close_db(database)
 
 def get_found_countries():
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
+    cur.execute("""SELECT stat.name, region FROM stat, countries
+                WHERE countries.name = stat.name AND found = 1;""")
     africa = []
-    cur.execute("SELECT name FROM stat WHERE region = 'Africa'")
-    for row in cur.fetchall():
-        africa.append(row[0])
     americas = []
-    cur.execute("SELECT name FROM stat WHERE region = 'Americas'")
-    for row in cur.fetchall():
-        americas.append(row[0])
     asia = []
-    cur.execute("SELECT name FROM stat WHERE region = 'Asia'")
-    for row in cur.fetchall():
-        asia.append(row[0])
     europe = []
-    cur.execute("SELECT name FROM stat WHERE region = 'Europe'")
-    for row in cur.fetchall():
-        europe.append(row[0])
     oceania = []
-    cur.execute("SELECT name FROM stat WHERE region = 'Oceania'")
     for row in cur.fetchall():
-        oceania.append(row[0])
+        if row[1] == 'Africa':
+            africa.append(row[0])
+        if row[1] == 'Americas':
+            americas.append(row[0])
+        if row[1] == 'Asia':
+            asia.append(row[0])
+        if row[1] == 'Europe':
+            europe.append(row[0])
+        if row[1] == 'Oceania':
+            oceania.append(row[0])
+    close_db(database)
     return {"Africa": africa, "Americas": americas,
             "Asia": asia, "Europe": europe, "Oceania": oceania}
 
 def get_country_stat(country):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
+    if not has_stat(country):
+        u = urllib.request.urlopen("https://restcountries.eu/rest/v2/name/" +
+                                   country +
+                                   "?fields=name;callingCodes;capital;population;languages;currencies;flag;region")
+        response = u.read()
+        data = json.loads(response)[0]
+        add_stat(data['name'], data['callingCodes'][0], data['capital'], data['population'],
+                 data['languages'][0]['name'], data['flag'], data['currencies'][0]['code'], data['region'])
     cur.execute("""SELECT stat.name, alpha_2, alpha_3, calling_code, capital,
                 population, lang, flag, currency, region FROM countries, stat
                 WHERE stat.name = ? AND countries.name = ?;""",
