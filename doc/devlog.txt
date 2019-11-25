@@ -134,3 +134,6 @@ Added database functions:
   - get_currency(country) converts the country name to the currency code
   - get_currency_list(currency) returns a list of currencies that the given currency can be converted into,
     returning empty list if conversion is not available
+wuJ -- 2019-11-25 9:14
+create account page showing this error: "Not Found
+The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."
