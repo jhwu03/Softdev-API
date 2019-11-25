@@ -128,13 +128,12 @@ def quiz():
         country = request.args['country']
     return render_template("quiz.html")
 
-@app.route("/countries")
-def countries():
+@app.route("/countries/<country>")
+def countries(country):
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
         # redirect to login page
-    country = request.args["country"]
     alpha = db_manager.get_alpha(country, "2")
     if (db_manager.has_stat(country)):
         stats = db_manager.get_country_stat(country)
