@@ -100,8 +100,7 @@ def home():
     name_stats = []
     if 'name' in request.args:
         #made a request to get info on name
-        name = request.args['name']
-        name_stats = db_manager.get_name_stats(name, country)
+        name_stats = db_manager.get_name_stats(request.args['name'], request.args['country'])
     return render_template("homepage.html", username=user, name_stats=name_stats)
 
 @app.route("/search")
