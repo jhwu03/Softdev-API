@@ -107,10 +107,12 @@ def home():
 def search():
     if "username" not in session:
     # if user is not logged in,
-        return redirect(url_for("login"))
+        return redirect(url_for('login'))
         # redirect to login page
-    keyword = request.args["keyword"]
-    results = db_manager.search_country(keyword)
+    results = []
+    if 'keyword' in request.args:
+        keyword = request.args['keyword']
+        results = db_manager.search_country(keyword)
     return render_template("results.html", results = results)
 
 
@@ -128,13 +130,10 @@ def countries():
     # if user is not logged in,
         return redirect(url_for("login"))
         # redirect to login page
-    if ("country_2" in request.args):
-        #made a request to change currencies
-        return render_template("countries.html")
     country = request.args["country"]
+    alpha = db_manager.get_alpha(country, "2")
     if (db_manager.has_stat(country)):
-        stats = db_manager.get_stat(country)
-        return render_template("countries.html", stats = stats)
+        stats = db_manager.get_country_stat(country)
     else:
         #if the stats are not in the database, then access the api
         u = urllib.request.urlopen("https://restcountries.eu/rest/v2/name/" + country.replace(" ", "%20"))
@@ -157,8 +156,35 @@ def countries():
         stats['currency'] = data[0]['currencies'][0]['name']
         stats['reg'] = data[0]['region']
         db_manager.add_stat(country, stats['callingCodes'], stats['cap'], stats['pop'], stats['languages'], stats['flag'], stats['currency'], stats['reg'])
-        return render_template("countries.html", stats = stats)
-
+        stats = db_manager.get_country_stat(country)
+    currency_stats = ""
+    name_stats = []
+    if ('curr_2' in request.args):
+        #made a request to change currencies
+        if ('value' in request.args):
+            #only converts if a value is given
+            value = request.args['value']
+            #needs to ensure that it can be converted into a double
+            curr_1 = db_manager.get_currency(country)
+            curr_2 = request.args['curr_2']
+            if (not has_currency(curr_1, curr_2):
+                u = urllib.request.urlopen("https://api.exchangerate-api.com/v4/latest/{}".format(curr_1))
+                response = u.read()
+                data = json.loads(response)
+                rate = data['rates'][curr_2]
+                db_manager.add_currency(curr_1, curr_2, rate)
+            currency_stats = "{} {} = {} {}".format(value, curr_1, db_manager.convert_currency(curr_1, value, curr_2), curr_2)
+    if ('name' in request.args):
+        #made a request to get info on name
+        name = request.args['name']
+        if (not has_name(name, country)):
+            u = urllib.request.urlopen("https://api.agify.io/?" + name + "=kim&country_id=" + alpha)
+            response = u.read()
+            data = json.loads(response)
+            db_manager.add_name(name, country, data['count'], data['age'])
+        name_stats = db_manager.get_name_stats
+    valid_curr_rates = db_manager.get_valid(country)
+    return render_template("country.html", stats = stats, currency_stats = currency_stats, name_stats = name_stats)
 
 @app.route("/logout")
 def logout():
