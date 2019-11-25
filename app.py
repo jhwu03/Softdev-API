@@ -135,7 +135,7 @@ def countries(country):
         return redirect(url_for("login"))
         # redirect to login page
     alpha = db_manager.get_alpha(country, "2")
-    if (db_manager.has_stat(country)):
+    if not (db_manager.has_stat(country)):
         stats = db_manager.get_country_stat(country)
     currency_stats = ""
     name_stats = []
