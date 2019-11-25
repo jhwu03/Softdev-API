@@ -93,7 +93,7 @@ def get_alpha(country, type):
     ans = ""
     data = cur.fetchone()
     if data is not None:
-        ans = cur.fetchone()[0]
+        ans = data[0]
     close_db(database)
     return ans
 
