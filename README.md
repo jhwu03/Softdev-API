@@ -5,8 +5,8 @@ After you've learned about these countries, test your knowledge with our quiz!
 
 ### Roster:
 - Benjamin Avrahami: Frontend and Bootstrap Framework
-- Ethan Chen: Backend Flask/API
-- Peihua Huang: Database
+- Ethan Chen: Backend Flask
+- Peihua Huang: Database/API
 - Jionghao Wu: Project Manager
 
 <br>

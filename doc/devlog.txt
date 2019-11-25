@@ -2,7 +2,7 @@ DEVLOG for Burgers and Fries
 
 **REMINDER**(When any team member stops working and pushes changes to github, they should update the devlog explaining what changes have been made. Include errors/bugs discovered or created )
 
-wuJ -- 2019-11-14 9:23
+wuJ -- 2019-11-14 09:23
 created GitHub repository
 discussed possible ideas for site
 
@@ -18,11 +18,11 @@ Copied over login mechanism from previous project
 huangP -- 2019-11-18 21:35
 Updated design doc to show Bootstrap as the frontend framework being used
 
-wuJ -- 2019-11-19 9:15
+wuJ -- 2019-11-19 09:15
 Fixed submodules for the final time(hopefully)
 added important reminder for members
 
-wuJ -- 2019-11-19 9:27
+wuJ -- 2019-11-19 09:27
 updated readme
 
 avrahamiB -- 2019-11-19 18:00
@@ -33,7 +33,7 @@ huangP -- 2019-11-19 20:58
 Wrote db_builder.py to initiate tables in the database if it does not already exist.
 Wrote the functions in db_manager that is required for login system.
 
-huangP -- 2019-11-20 9:08
+huangP -- 2019-11-20 09:08
 Procedures/protocols we will observe to make more awesome
   - test and debug each other people’s code (round robin style because people begin internalizing the code)
   - ask for help when needed and don’t shame the person asking
@@ -56,13 +56,13 @@ Updated database:
 Updated design doc:
   - The changes made above to database (shortening table name and merging alpha-2 and alpha-3 functions) have been reflected in design doc
 
-avrahamiB -- 2019-11-21 9:25
+avrahamiB -- 2019-11-21 09:25
 Made login page look slightly fancier, started adding css and other features
 Put in alerts from Bootstrap if any errors are flashed
 Started quiz page
 Waiting to make more substantial contributions until flask app is running
 
-wuJ -- 2019-11-21 9:27
+wuJ -- 2019-11-21 09:27
 updated README with API and instructions on how to run
 still need to add hyperlinks to each API
 
@@ -104,7 +104,7 @@ Made the search button right-aligned
 huangP -- 2019-11-22 08:52
 Put stylesheet in static to fix linking issues
 
-wuJ -- 2019-11-22 9:24
+wuJ -- 2019-11-22 09:24
 updated README to prevent any confusions with installation
 
 avrahamiB -- 2019-11-22 21:24
@@ -134,10 +134,19 @@ Added database functions:
   - get_currency(country) converts the country name to the currency code
   - get_currency_list(currency) returns a list of currencies that the given currency can be converted into,
     returning empty list if conversion is not available
-    
-wuJ -- 2019-11-25 9:14
+
+wuJ -- 2019-11-25 09:14
 create account page showing this error: "Not Found
 The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."
 
-wuJ -- 2019-11-25 9:25
+wuJ -- 2019-11-25 09:25
  "HOME STRETCH PLAN"
+
+huangP -- 2019-11-25 11:15
+Debugged app.py:
+  - fixed naming conventions to conform to that in the design doc
+  - fixed an undeclared variable in /home
+  - fixed merge conflicts after merging api_backend and master branch
+Debugged database functions:
+  - fixed typo in search_country so that it compares the keyword with the right table
+  - add a return value for found_country (country name if it is a valid country, and empty string if not)

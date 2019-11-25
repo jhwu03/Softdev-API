@@ -111,10 +111,10 @@ def search():
         # redirect to login page
     results = []
     if 'keyword' in request.args:
-        print("helllooo wolrd")
+        # print("keyword is in args")
         keyword = request.args['keyword']
         results = db_manager.search_country(keyword)
-        print(results)
+        # print(results)
     return render_template("results.html", results = results)
 
 
