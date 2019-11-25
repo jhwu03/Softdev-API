@@ -150,3 +150,12 @@ Debugged app.py:
 Debugged database functions:
   - fixed typo in search_country so that it compares the keyword with the right table
   - add a return value for found_country (country name if it is a valid country, and empty string if not)
+
+avrahamiB -- 2019-11-25 18:54
+Made create-account page extend base (was missing before)
+Switched pages for country facts and search results
+Added a link back to the home page from the quiz
+Changed determination of what country to see from a form to the url
+Trying to access country facts still throws an error; debugging:
+  Reversed the conditional in country function, now it accesses the stats if it does not already have
+  Still broken, though
