@@ -20,10 +20,6 @@ def root():
     #if user is logged in,
         return redirect(url_for("home"))
         # redirect to homepage
-    u = urllib.request.urlopen("https://restcountries.eu/rest/v2/" + country.replace(" ", "%20"))
-    response = u.read()
-    data = json.loads(response)
-    return render_template("countries.html", name = data[0]['name'], alpha= data[0]['alpha2Code'], pop = data[0]['population'])
     return redirect(url_for("login"))
     # else, redirect to login page
 
