@@ -8,7 +8,7 @@ from flask import session
 from flask import flash
 import urllib.request, json
 # import flask functions
-from data import db_manager, db_builder
+from utl import db_manager, db_builder
 # import database functions
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
