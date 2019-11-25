@@ -119,3 +119,18 @@ Added functions to database manager:
   - get_country_stat(country) to get all the stats for a country as a dictionary
 Added to db_build in database builder to fill countries table if it is still empty when Flask app starts
 Renamed stylesheet to match the href in homepage template
+
+huangP -- 2019-11-24 23:01
+Updated database tables:
+  - added conversion column to stat table to denote whether a currency conversion is possible
+    (2 = no, 1 = yes and data already pulled from API, 0 = yes but data not pulled from API)
+Updated database functions:
+  - get_country_stat now gets data from REST Countries API if the country stat is not already in db and then adds entry to db
+    - when adding a new entry from API to db, it also checks with the Exchange Rates API to see if currency conversion is possible
+  - get_name_stats now checks with the Agify.io API. If the data is not in the db, it is pulled from API and stored into db
+  - delete has_currency because it is no longer used (since the conversion column takes care of it)
+  - add_stat now takes into account the new conversion column
+Added database functions:
+  - get_currency(country) converts the country name to the currency code
+  - get_currency_list(currency) returns a list of currencies that the given currency can be converted into,
+    returning empty list if conversion is not available

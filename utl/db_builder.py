@@ -31,7 +31,8 @@ def db_build():
                                                 lang TEXT,
                                                 flag TEXT,
                                                 currency TEXT,
-                                                region TEXT);""")
+                                                region TEXT,
+                                                conversion INTEGER);""")
     exec_cmd("""CREATE TABLE IF NOT EXISTS currency(currency_1 TEXT,
                                                     value_1 REAL,
                                                     currency_2 TEXT,
