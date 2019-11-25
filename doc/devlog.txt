@@ -138,3 +138,6 @@ Added database functions:
 wuJ -- 2019-11-25 9:14
 create account page showing this error: "Not Found
 The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again."
+
+wuJ -- 2019-11-25 9:25
+ "HOME STRETCH PLAN"
