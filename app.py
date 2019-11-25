@@ -50,7 +50,7 @@ def login():
             # else is username/password is incorrect
                 flash(response)
                 # flash error
-    return render_template("login/login.html")
+    return render_template("login.html")
     # render login template
 
 
@@ -86,7 +86,7 @@ def create_account():
                 # else if the username is already taken
                     flash(response)
                     # flash error
-    return render_template("login/create-account.html")
+    return render_template("create-acc.html")
     # render create-account.html template
 
 @app.route("/home")
@@ -97,11 +97,12 @@ def home():
         # redirect to login page
     user = session["username"]
     #user is set to the person logged in
-    if ('name' in request.args):
+    name_stats = []
+    if 'name' in request.args:
         #made a request to get info on name
         name = request.args['name']
         name_stats = db_manager.get_name_stats(name, country)
-    return render_template("home.html", username=user, name_stats=name_stats)
+    return render_template("homepage.html", username=user, name_stats=name_stats)
 
 @app.route("/search")
 def search():
