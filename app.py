@@ -101,7 +101,11 @@ def home():
         # redirect to login page
     user = session["username"]
     #user is set to the person logged in
-    return render_template("home.html", username=user)
+    if ('name' in request.args):
+        #made a request to get info on name
+        name = request.args['name']
+        name_stats = db_manager.get_name_stats(name, country)
+    return render_template("home.html", username=user, name_stats=name_stats)
 
 @app.route("/search")
 def search():
@@ -148,10 +152,6 @@ def countries():
             curr_1 = db_manager.get_currency(country)
             curr_2 = request.args['curr_2']
             currency_stats = "{} {} = {} {}".format(value, curr_1, db_manager.convert_currency(curr_1, value, curr_2), curr_2)
-    if ('name' in request.args):
-        #made a request to get info on name
-        name = request.args['name']
-        name_stats = db_manager.get_name_stats(name, country)
     return render_template("country.html", stats = stats, currency_stats = currency_stats, name_stats = name_stats, valid_curr_rates = valid_curr_rates)
 
 @app.route("/logout")
