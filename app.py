@@ -54,7 +54,7 @@ def login():
     # render login template
 
 
-@app.route("/create-account")
+@app.route("/create-acc")
 def create_account():
     if "username" in session:
     # if user is logged in,
@@ -160,5 +160,6 @@ def logout():
     # redirect user back to login page
 
 if __name__ == "__main__":
+    db_builder.db_build()
     app.debug = True
     app.run()
