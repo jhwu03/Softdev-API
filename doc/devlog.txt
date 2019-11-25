@@ -2,7 +2,7 @@ DEVLOG for Burgers and Fries
 
 **REMINDER**(When any team member stops working and pushes changes to github, they should update the devlog explaining what changes have been made. Include errors/bugs discovered or created )
 
-wuJ -- 2019-11-14 09:23
+wuJ -- 2019-11-14 9:23
 created GitHub repository
 discussed possible ideas for site
 
@@ -18,25 +18,22 @@ Copied over login mechanism from previous project
 huangP -- 2019-11-18 21:35
 Updated design doc to show Bootstrap as the frontend framework being used
 
-wuJ -- 2019-11-19 09:15
+wuJ -- 2019-11-19 9:15
 Fixed submodules for the final time(hopefully)
 added important reminder for members
 
-chenE -- 2019-11-19 09:21
-Copied over login mechanism from previous project
-Added app.py with routes that lead to login, create-acc, and home
-
-wuJ -- 2019-11-19 09:27
+wuJ -- 2019-11-19 9:27
 updated readme
 
 avrahamiB -- 2019-11-19 18:00
 Added jinja inheritance to html files
+Created basic file system; put at least a blank html file to render each planned page
 
 huangP -- 2019-11-19 20:58
 Wrote db_builder.py to initiate tables in the database if it does not already exist.
 Wrote the functions in db_manager that is required for login system.
 
-huangP -- 2019-11-20 09:08
+huangP -- 2019-11-20 9:08
 Procedures/protocols we will observe to make more awesome
   - test and debug each other people’s code (round robin style because people begin internalizing the code)
   - ask for help when needed and don’t shame the person asking
@@ -46,7 +43,7 @@ huangP -- 2019-11-20 12:48
 Added requirements.txt and tested it in new virtual environment.
 
 wuJ -- 2019-11-20 20:54
-Procedures/protocols we will observe to make more awesome(additions to Devo Peihua's list)
+Procedures/protocols we will observe to make more awesome(additionals to Devo Peihua's list)
   - accept comments from others and improve from those comments rather than attempting to disprove them
   - have checkups and deadlines to keep track of progress
 
@@ -59,9 +56,15 @@ Updated database:
 Updated design doc:
   - The changes made above to database (shortening table name and merging alpha-2 and alpha-3 functions) have been reflected in design doc
 
-avrahamiB -- 2019-11-21 09:25
+avrahamiB -- 2019-11-21 9:25
 Made login page look slightly fancier, started adding css and other features
+Put in alerts from Bootstrap if any errors are flashed
 Started quiz page
+Waiting to make more substantial contributions until flask app is running
+
+wuJ -- 2019-11-21 9:27
+updated README with API and instructions on how to run
+still need to add hyperlinks to each API
 
 huangP -- 2019-11-21 14:48
 Finished all of the database functions.
@@ -69,3 +72,65 @@ Add two new database functions and updated the list of functions on design doc:
   - found_country(country) sets a country's found value to 1
   - get_found_countries() returns a dictionary with the keys being the regions of the world and values as the countries found in each region
 Update instructions to run the project on README
+
+wuJ -- 2019-11-21 20:50
+Added hyperlinks for each API in the README
+we need Wheel in requirements.txt
+
+huangP -- 2019-11-21 21:48
+Merged api_backend with master branch
+Added wheel to requirements.txt and tested it on new virtual environment
+Made sure login mechanism and homepage are fully functioning. (Other routes do not crash but are mostly empty)
+Updated route names on design doc
+Removed Maps Static API from README and design doc because it costs money per request
+Debugged:
+  Flask app:
+    - removed unnecessary error messages since database functions already returns it
+    - changed naming convention to match that in design doc
+    - fixed python file to conform to PEP
+  Database:
+    - fixed importing to work with flask app
+  Templates:
+    - added a logout button to homepage
+    - added blank country.html and results.html to be worked on by Ben
+Bug found (to be fixed):
+  - in /country, the variable country is sometimes used before it's defined
+  - also in /country, unclear whether country is alpha-2 code or country name (both instances are used)
+
+avrahamiB -- 2019-11-21 22:50
+Put in navbar from Bootstrap at the top of the homepage
+Made the search button right-aligned
+
+huangP -- 2019-11-22 08:52
+Put stylesheet in static to fix linking issues
+
+wuJ -- 2019-11-22 9:24
+updated README to prevent any confusions with installation
+
+avrahamiB -- 2019-11-22 21:24
+Added map as background to the homepage
+Put background behind instructions so they could still be seen
+Made background opaque so the map could still be seen
+
+huangP -- 2019-11-22 22:36
+Added functions to database manager:
+  - add_stat(country) to add stats for the country if it is not in the database
+  - has_stat(country) to check if stats for country is in database
+  - get_country_stat(country) to get all the stats for a country as a dictionary
+Added to db_build in database builder to fill countries table if it is still empty when Flask app starts
+Renamed stylesheet to match the href in homepage template
+
+huangP -- 2019-11-24 23:01
+Updated database tables:
+  - added conversion column to stat table to denote whether a currency conversion is possible
+    (2 = no, 1 = yes and data already pulled from API, 0 = yes but data not pulled from API)
+Updated database functions:
+  - get_country_stat now gets data from REST Countries API if the country stat is not already in db and then adds entry to db
+    - when adding a new entry from API to db, it also checks with the Exchange Rates API to see if currency conversion is possible
+  - get_name_stats now checks with the Agify.io API. If the data is not in the db, it is pulled from API and stored into db
+  - delete has_currency because it is no longer used (since the conversion column takes care of it)
+  - add_stat now takes into account the new conversion column
+Added database functions:
+  - get_currency(country) converts the country name to the currency code
+  - get_currency_list(currency) returns a list of currencies that the given currency can be converted into,
+    returning empty list if conversion is not available

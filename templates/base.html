@@ -2,7 +2,6 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style.css">
     {% block css %}
     {% endblock %}
       <title>
@@ -10,11 +9,13 @@
       {% endblock %}
       </title>
   </head>
-  <body>
+  {% block bodyformat %}
+  <body style="padding-left: 50px;">
+  {% endblock %}
     {% block prebody %}
     {% endblock %}
     {% with errors = get_flashed_messages() %}
-      <ul>
+      <ul style="list-style: none;">
         {% for error in errors %}
           <li>
             <div class="alert alert-danger">

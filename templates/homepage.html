@@ -1,22 +1,41 @@
 {% extends "base.html" %}
 {% block css %}
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='homestyle.css')}}">
 {% endblock %}
 {% block title %}
   All About Countries
 {% endblock %}
+{% block bodyformat %}
+  <body background="https://images-na.ssl-images-amazon.com/images/I/91r3WRR8-cL._SL1500_.jpg">
+{% endblock %}
 {% block prebody %}
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav id="navbarhead" class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand">Burgers and Fries</a>
     <ul class="nav navbar-nav ml-auto">
       <li>
-        <form class="form-inline" action="/search">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline" action="/search" method="GET">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
           <button type="submit" class="btn">Search</button>
+        </form>
+      </li>
+      <li>
+        <form action="/logout" method="GET">
+          <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
         </form>
       </li>
     </ul>
   </nav>
 {% endblock %}
 {% block body %}
-  <h3>Welcome {{ user }}!
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div id="beyondnavbar" class="col col-lg-4">
+        <h3>Welcome {{username}}!</h3>
+        <br>
+        <br>
+        <p>Click the following link to go to the quiz:</p>
+        <a href="/quiz">Countries Quiz</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}

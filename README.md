@@ -1,6 +1,6 @@
 # All About Countries by Burgers and Fries
-This is a website all about countries! 
-In addition to info on every country in the world, there is also a currency converter and werid facts section.
+This is a website all about countries!
+In addition to info on every country in the world, there is also a currency converter and weird facts section.
 After you've learned about these countries, test your knowledge with our quiz!
 
 ### Roster:
@@ -11,30 +11,28 @@ After you've learned about these countries, test your knowledge with our quiz!
 
 <br>
 
-### APIs required:
-- REST Countries - basic info about countries
-- Currency Exchange - exchange rates between base country and other countries on record
-- Open Trivia - list of trivia questions (may be implemented if time allows)
-- Maps Static - customized image from google maps
-- UNdata - information on growth, pollution, and health indicators that the UN uses
-- Agify.io - number people and average age of a person with a given name in a given country
+### APIs required (no keys needed!!!):
+- [REST Countries](https://docs.google.com/document/d/1aQRi7FIILs_x3RE5i65KHuuy49Rt05ZqERKqZjOGiJw/edit) - basic info about countries
+- [Currency Exchange](https://docs.google.com/document/d/1yTckLoGBHA-C37hhukXOc76Jh_770L7m3Moj-wMFeUU/edit) - exchange rates between base country and other countries on record
+- [Open Trivia](https://docs.google.com/document/d/1yp2nicOExDYlrEfdvqspD17Kz5c-xMSWHudfmNjJgQ4/edit) - list of trivia questions (may be implemented if time allows)
+- [UNdata](https://docs.google.com/document/d/1RUMsyU0gyltsdWV6Uwzzf_RHC0sg9F6sL8zZbKQM9yc/edit) - information on growth, pollution, and health indicators that the UN uses
+- [Agify.io](https://docs.google.com/document/d/1_YHaU-HXpDXaBDa3xPbGl2P9yBmzjuxKakyp4LRwow4/edit) - number people and average age of a person with a given name in a given country
 
 
 ### How to run this project
-1. Clone and change into our repository:
+1. To ensure that we're running on the same package versions, run it with a virtual environment with the following commands:
+   ```
+   python3 -m venv <name of vitrual environment>    # creates a virtual environment named <name of virtual environment>
+   .<name of vitrual environment>/bin/activate      # activates the virtual environment
+   ```
+2. Clone and change into our repository:
    ```
    git clone https://github.com/jhwu03/Softdev-API.git
    cd Softdev-API/
    ```
-2. Install all the needed packages using the following command in a terminal: <br>
+3. Install all the needed packages using the following command in a terminal: <br>
    ```
    pip3 install -r doc/requirements.txt
-   ```
-3. If pip command is restricted, run it with a virtual environment with the following commands:
-   ```
-   python3 -m venv <name of vitrual environment>    # creates a virtual environment named <name of virtual environment>
-   .<name of vitrual environment>/bin/activate      # activates the virtual environment
-   pip3 install -r doc/requirements.txt             # installs all the packages needed
    ```
 4. Once all the packages are install, run the project:
    ```
