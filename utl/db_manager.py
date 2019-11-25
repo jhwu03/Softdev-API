@@ -175,7 +175,7 @@ def add_country(country, alpha_2, alpha_3):
 def search_country(keyword):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("SELECT name FROM stat WHERE name LIKE '%' || ? || '%';",
+    cur.execute("SELECT name FROM countries WHERE name LIKE '%' || ? || '%';",
                 (keyword,))
     data = []
     for row in cur.fetchall():
