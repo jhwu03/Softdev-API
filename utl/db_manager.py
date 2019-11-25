@@ -186,8 +186,13 @@ def search_country(keyword):
 def found_country(country):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("UPDATE countries SET found = 1 WHERE name = ?;", (country,))
+    cur.execute("SELECT * FROM countries WHERE name = ?;", (country,))
+    data = ""
+    if not cur.fetchone() is None:
+        cur.execute("UPDATE countries SET found = 1 WHERE name = ?;", (country,))
+        data = country
     close_db(database)
+    return data
 
 def get_found_countries():
     database = sqlite3.connect(DB_FILE)
