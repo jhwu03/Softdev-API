@@ -124,6 +124,7 @@ def quiz():
         if (db_manager.has_country(country)):
         #if database has the country then check it off in the database
             response = db_manager.found_country(country)
+            #goes through database to see if the country is there. If it is then response is a string of the country name
     if 'reset' in request.args:
     #if the user wants to reset their quiz
         db_manager.reset_quiz()
