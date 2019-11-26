@@ -120,26 +120,24 @@ def quiz():
             response = db_manager.found_country(country)
     return render_template("quiz.html", results = db_manager.get_found_countries(), response = response)
 
-@app.route("/countries")
-def countries():
+@app.route("/countries/<country>")
+def countries(country):
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
         # redirect to login page
-    country = request.args["country"]
     alpha = db_manager.get_alpha(country, "2")
-    if (db_manager.has_stat(country)):
-        stats = db_manager.get_country_stat(country)
+    stats = db_manager.get_country_stat(country)
     currency_stats = ""
     name_stats = []
-    valid_curr_rates = db_manager.get_currency_list(country)
+    curr_1 = db_manager.get_currency(country)
+    valid_curr_rates = db_manager.get_currency_list(curr_1)
     if ('curr_2' in request.args):
         #made a request to change currencies
         if ('value' in request.args):
             #only converts if a value is given
             value = request.args['value']
             #needs to ensure that it can be converted into a double
-            curr_1 = db_manager.get_currency(country)
             curr_2 = request.args['curr_2']
             currency_stats = "{} {} = {} {}".format(value, curr_1, db_manager.convert_currency(curr_1, value, curr_2), curr_2)
     return render_template("country.html", stats = stats, currency_stats = currency_stats, name_stats = name_stats, valid_curr_rates = valid_curr_rates)
