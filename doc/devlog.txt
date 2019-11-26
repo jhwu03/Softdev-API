@@ -166,3 +166,13 @@ Changed determination of what country to see from a form to the url
 Trying to access country facts still throws an error; debugging:
   Reversed the conditional in country function, now it accesses the stats if it does not already have
   Still broken, though
+
+wuJ -- 2019-11-26 9:12
+Need to fix special character countries
+countries found so far:
+- Curaçao
+- Côte d'Ivoire
+- Réunion
+- Saint Barthélemy
+- Åland Islands
+add the nav bar to every page so we dont need to use the browser back button
