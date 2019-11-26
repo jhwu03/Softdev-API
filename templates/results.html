@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
   {% for i in results %}
-    <p>{{i}}</p>
+    <a href="/countries/{{i}}">{{i}}</a>
   {% endfor %}
 {% endblock %}

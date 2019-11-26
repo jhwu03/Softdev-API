@@ -32,24 +32,19 @@ def login():
         # redirect to homepage
     if len(request.args) == 2:
     # if users clicked the log in button,
-        if request.args["username"] == "" or request.args["password"] == "":
-        # if either username or password is blank
-            flash("Please do not leave any fields blank")
-            # flash error
+        response = db_manager.verify_login(request.args["username"],
+                                           request.args["password"])
+        # verify entered username and password with database
+        if response == "":
+        # if username and password combo is in database
+            session["username"] = request.args["username"]
+            # add username to session (log user in)
+            return redirect(url_for("home"))
+            # redirect to homepage
         else:
-            response = db_manager.verify_login(request.args["username"],
-                                               request.args["password"])
-            # verify entered username and password with database
-            if response == "":
-            # if username and password combo is in database
-                session["username"] = request.args["username"]
-                # add username to session (log user in)
-                return redirect(url_for("home"))
-                # redirect to homepage
-            else:
-            # else is username/password is incorrect
-                flash(response)
-                # flash error
+        # else is username/password is incorrect
+            flash(response)
+            # flash error
     return render_template("login.html")
     # render login template
 
@@ -62,30 +57,25 @@ def create_account():
         # redirect to homepage
     if len(request.args) == 3:
     # if users clicked the submit button on create account page
-        if request.args["username"] == "" or request.args["passwordNew"] == "" or request.args["passwordRepeat"] == "":
-        # if any one of the three fields are blank,
-            flash("Please do not leave any fields blank")
+        if request.args["passwordNew"] != request.args["passwordRepeat"]:
+        # if the two passwords do not match,
+            flash("Passwords don't match, try again")
             # flash an error
         else:
-            if request.args["passwordNew"] != request.args["passwordRepeat"]:
-            # if the two passwords do not match,
-                flash("Passwords don't match, try again")
-                # flash an error
+        # else if the passwords match
+            response = db_manager.add_login(request.args["username"],
+                                            request.args["passwordNew"])
+            # check with database to see if the username is valid/unique
+            if response == "":
+            # if username is valid,
+                session["username"] = request.args["username"]
+                # add username to session (log user in)
+                return redirect(url_for("login"))
+                # redirect to login page
             else:
-            # else if the passwords match
-                response = db_manager.add_login(request.args["username"],
-                                                request.args["passwordNew"])
-                # check with database to see if the username is valid/unique
-                if response == "":
-                # if username is valid,
-                    session["username"] = request.args["username"]
-                    # add username to session (log user in)
-                    return redirect(url_for("login"))
-                    # redirect to login page
-                else:
-                # else if the username is already taken
-                    flash(response)
-                    # flash error
+            # else if the username is already taken
+                flash(response)
+                # flash error
     return render_template("create-acc.html")
     # render create-account.html template
 
@@ -111,10 +101,10 @@ def search():
         # redirect to login page
     results = []
     if 'keyword' in request.args:
-        print("helllooo wolrd")
+        # print("keyword is in args")
         keyword = request.args['keyword']
         results = db_manager.search_country(keyword)
-        print(results)
+        # print(results)
     return render_template("results.html", results = results)
 
 
@@ -130,19 +120,17 @@ def quiz():
             response = db_manager.found_country(country)
     return render_template("quiz.html", results = db_manager.get_found_countries(), response = response)
 
-@app.route("/countries")
-def countries():
+@app.route("/countries/<country>")
+def countries(country):
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
         # redirect to login page
-    country = request.args["country"]
     alpha = db_manager.get_alpha(country, "2")
-    if (db_manager.has_stat(country)):
-        stats = db_manager.get_country_stat(country)
+    stats = db_manager.get_country_stat(country)
     currency_stats = ""
     name_stats = []
-    valid_curr_rates = db_manager.get_currency_list(country)
+    valid_curr_rates = db_manager.get_currency_list(db_manager.get_currency(country))
     if ('curr_2' in request.args):
         #made a request to change currencies
         if ('value' in request.args):
