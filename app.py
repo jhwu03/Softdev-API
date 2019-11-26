@@ -101,10 +101,10 @@ def search():
         # redirect to login page
     results = []
     if 'keyword' in request.args:
-        # print("keyword is in args")
+        print("helllooo wolrd")
         keyword = request.args['keyword']
         results = db_manager.search_country(keyword)
-        # print(results)
+        print(results)
     return render_template("results.html", results = results)
 
 
@@ -120,17 +120,19 @@ def quiz():
             response = db_manager.found_country(country)
     return render_template("quiz.html", results = db_manager.get_found_countries(), response = response)
 
-@app.route("/countries/<country>")
-def countries(country):
+@app.route("/countries")
+def countries():
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
         # redirect to login page
+    country = request.args["country"]
     alpha = db_manager.get_alpha(country, "2")
-    stats = db_manager.get_country_stat(country)
+    if (db_manager.has_stat(country)):
+        stats = db_manager.get_country_stat(country)
     currency_stats = ""
     name_stats = []
-    valid_curr_rates = db_manager.get_currency_list(db_manager.get_currency(country))
+    valid_curr_rates = db_manager.get_currency_list(country)
     if ('curr_2' in request.args):
         #made a request to change currencies
         if ('value' in request.args):
