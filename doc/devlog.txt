@@ -159,3 +159,7 @@ Changed determination of what country to see from a form to the url
 Trying to access country facts still throws an error; debugging:
   Reversed the conditional in country function, now it accesses the stats if it does not already have
   Still broken, though
+
+avrahamiB -- 2019-11-25 21:42
+Added a link to the countries in the search results
+Put in the list of facts about the country in the country's page
