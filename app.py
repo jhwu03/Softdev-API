@@ -114,6 +114,7 @@ def quiz():
     # if user is not logged in,
         return redirect(url_for("login"))
         # redirect to login page
+    response = ""
     if 'country' in request.args:
         country = request.args['country']
         if (db_manager.has_country(country)):
