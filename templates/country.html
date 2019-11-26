@@ -1,1 +1,26 @@
 {% extends "base.html" %}
+{% block body %}
+   Stats:
+  {% for i in stats %}
+    {{i}} -- {{stats[i]}}
+    <br>
+  {% endfor %}
+  <br>
+  Currency stats:
+  {% for i in currency_stats %}
+    {{i}}
+    <br>
+  {% endfor %}
+  <br>
+  Name stats:
+  {% for i in name_stats %}
+    {{i}}
+    <br>
+  {% endfor %}
+  <br>
+  Currency rates:
+  {% for i in valid_curr_rates %}
+    {{i}}
+    <br>
+  {% endfor %}
+{% endblock %}
