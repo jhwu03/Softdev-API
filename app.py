@@ -57,30 +57,25 @@ def create_account():
         # redirect to homepage
     if len(request.args) == 3:
     # if users clicked the submit button on create account page
-        if request.args["username"] == "" or request.args["passwordNew"] == "" or request.args["passwordRepeat"] == "":
-        # if any one of the three fields are blank,
-            flash("Please do not leave any fields blank")
+        if request.args["passwordNew"] != request.args["passwordRepeat"]:
+        # if the two passwords do not match,
+            flash("Passwords don't match, try again")
             # flash an error
         else:
-            if request.args["passwordNew"] != request.args["passwordRepeat"]:
-            # if the two passwords do not match,
-                flash("Passwords don't match, try again")
-                # flash an error
+        # else if the passwords match
+            response = db_manager.add_login(request.args["username"],
+                                            request.args["passwordNew"])
+            # check with database to see if the username is valid/unique
+            if response == "":
+            # if username is valid,
+                session["username"] = request.args["username"]
+                # add username to session (log user in)
+                return redirect(url_for("login"))
+                # redirect to login page
             else:
-            # else if the passwords match
-                response = db_manager.add_login(request.args["username"],
-                                                request.args["passwordNew"])
-                # check with database to see if the username is valid/unique
-                if response == "":
-                # if username is valid,
-                    session["username"] = request.args["username"]
-                    # add username to session (log user in)
-                    return redirect(url_for("login"))
-                    # redirect to login page
-                else:
-                # else if the username is already taken
-                    flash(response)
-                    # flash error
+            # else if the username is already taken
+                flash(response)
+                # flash error
     return render_template("create-acc.html")
     # render create-account.html template
 
