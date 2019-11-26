@@ -32,24 +32,19 @@ def login():
         # redirect to homepage
     if len(request.args) == 2:
     # if users clicked the log in button,
-        if request.args["username"] == "" or request.args["password"] == "":
-        # if either username or password is blank
-            flash("Please do not leave any fields blank")
-            # flash error
+        response = db_manager.verify_login(request.args["username"],
+                                           request.args["password"])
+        # verify entered username and password with database
+        if response == "":
+        # if username and password combo is in database
+            session["username"] = request.args["username"]
+            # add username to session (log user in)
+            return redirect(url_for("home"))
+            # redirect to homepage
         else:
-            response = db_manager.verify_login(request.args["username"],
-                                               request.args["password"])
-            # verify entered username and password with database
-            if response == "":
-            # if username and password combo is in database
-                session["username"] = request.args["username"]
-                # add username to session (log user in)
-                return redirect(url_for("home"))
-                # redirect to homepage
-            else:
-            # else is username/password is incorrect
-                flash(response)
-                # flash error
+        # else is username/password is incorrect
+            flash(response)
+            # flash error
     return render_template("login.html")
     # render login template
 
