@@ -141,7 +141,7 @@ The requested URL was not found on the server. If you entered the URL manually p
 
 wuJ -- 2019-11-25 09:25
  "HOME STRETCH PLAN"
-- Finish working base Countries HTML for each country (11/27)(benjamin)
+- Finish basic formatted Countries HTML for each country (11/27)(benjamin)
 - Finish Countries Quiz. for example, at the moment the check button works but site is not updated with checks(11/28)(everyone)
 - country quiz -- progress bar(11/28)(benjamin)
 - still need to clean up some front end formatting(12/2)(benjamin)
