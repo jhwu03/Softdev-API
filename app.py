@@ -101,12 +101,14 @@ def search():
         # redirect to login page
     results = []
     if 'keyword' in request.args:
-        print("helllooo wolrd")
+        #gets the keyword from the search bar
         keyword = request.args['keyword']
+        #defines keyword
         results = db_manager.search_country(keyword)
+        #goes through the database and find countries that fit the keyword
         print(results)
     return render_template("results.html", results = results)
-
+    #renders results.html and gives the list of results
 
 @app.route("/quiz")
 def quiz():
@@ -116,10 +118,19 @@ def quiz():
         # redirect to login page
     response = ""
     if 'country' in request.args:
+    #sees if they have submitted an answer
         country = request.args['country']
+        #defines country with their answer
         if (db_manager.has_country(country)):
+        #if database has the country then check it off in the database
             response = db_manager.found_country(country)
+            #goes through database to see if the country is there. If it is then response is a string of the country name
+    if 'reset' in request.args:
+    #if the user wants to reset their quiz
+        db_manager.reset_quiz()
+        #resets quiz by setting all the found values of the countries back to zero
     return render_template("quiz.html", results = db_manager.get_found_countries(), response = response)
+    #renders quiz.html giving the list of the found countries as results, as well as a response as to whether their answer was correct or incorrect
 
 @app.route("/countries/<alpha_3>")
 def countries(alpha_3):
@@ -130,8 +141,11 @@ def countries(alpha_3):
     stats = db_manager.get_country_stat(alpha_3)
     country = db_manager.alpha_to_country(alpha_3)
     currency_stats = ""
+    #defines currency stats
     curr_1 = db_manager.get_currency(country)
+    #goes through database to get the currency code of the country of the page the user is on
     valid_curr_rates = db_manager.get_currency_list(curr_1)
+    #goes through database to get the valid currency list by which the API gives rates to
     if ('curr_2' in request.args):
         #made a request to change currencies
         if ('value' in request.args):
@@ -139,8 +153,11 @@ def countries(alpha_3):
             value = request.args['value']
             #needs to ensure that it can be converted into a double
             curr_2 = request.args['curr_2']
+            #defines the second currency code
             currency_stats = "{} {} = {} {}".format(value, curr_1, db_manager.convert_currency(curr_1, value, curr_2), curr_2)
+            #goes through the database to find the rate, and the database converts the two rates, the answer is defined to currency_stats
     return render_template("country.html", stats = stats, currency_stats = currency_stats, valid_curr_rates = valid_curr_rates)
+    #renders country.html with the dict of country stats, a string of currency stats, and a list of the valid currency exchanges
 
 @app.route("/logout")
 def logout():
