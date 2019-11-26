@@ -135,11 +135,10 @@ def countries(country):
         return redirect(url_for("login"))
         # redirect to login page
     alpha = db_manager.get_alpha(country, "2")
-    if not (db_manager.has_stat(country)):
-        stats = db_manager.get_country_stat(country)
+    stats = db_manager.get_country_stat(country)
     currency_stats = ""
     name_stats = []
-    valid_curr_rates = db_manager.get_currency_list(country)
+    valid_curr_rates = db_manager.get_currency_list(db_manager.get_currency(country))
     if ('curr_2' in request.args):
         #made a request to change currencies
         if ('value' in request.args):
