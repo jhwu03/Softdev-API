@@ -126,7 +126,9 @@ def quiz():
         # redirect to login page
     if 'country' in request.args:
         country = request.args['country']
-    return render_template("quiz.html")
+        if (db_manager.has_country(country)):
+            response = db_manager.found_country(country)
+    return render_template("quiz.html", results = db_manager.get_found_countries(), response = response)
 
 @app.route("/countries")
 def countries():
