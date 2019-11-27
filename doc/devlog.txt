@@ -15,6 +15,9 @@ Updated design doc:
 avrahamiB -- 2019-11-18 17:21
 Copied over login mechanism from previous project
 
+chenE -- 2019-11-18 18:10
+Copied over login mechanism from previous project, waiting to make edits in accordance to front end
+
 huangP -- 2019-11-18 21:35
 Updated design doc to show Bootstrap as the frontend framework being used
 
@@ -29,6 +32,10 @@ avrahamiB -- 2019-11-19 18:00
 Added jinja inheritance to html files
 Created basic file system; put at least a blank html file to render each planned page
 
+chenE -- 2019-11-19 19:52
+Started the countries and quiz function, waiting for database functions
+Just added the check user's session
+
 huangP -- 2019-11-19 20:58
 Wrote db_builder.py to initiate tables in the database if it does not already exist.
 Wrote the functions in db_manager that is required for login system.
@@ -41,6 +48,12 @@ Procedures/protocols we will observe to make more awesome
 
 huangP -- 2019-11-20 12:48
 Added requirements.txt and tested it in new virtual environment.
+
+chenE -- 2019-11-20 14:42
+Finished the search function:
+  -takes a keyword from args,
+  -searches it up in the database
+  -spits out a list of results found
 
 wuJ -- 2019-11-20 20:54
 Procedures/protocols we will observe to make more awesome(additionals to Devo Peihua's list)
@@ -55,6 +68,9 @@ Updated database:
   - wrote and merge get_alpha_3 and get_alpha_2 together into get_alpha to prevent writing duplicate code
 Updated design doc:
   - The changes made above to database (shortening table name and merging alpha-2 and alpha-3 functions) have been reflected in design doc
+  
+chenE -- 2019-11-21 09:14
+Wrote and tested some API stuff, getting API's for each country and add them to the database
 
 avrahamiB -- 2019-11-21 09:25
 Made login page look slightly fancier, started adding css and other features
@@ -65,6 +81,12 @@ Waiting to make more substantial contributions until flask app is running
 wuJ -- 2019-11-21 09:27
 updated README with API and instructions on how to run
 still need to add hyperlinks to each API
+
+chenE -- 2019-11-21 12:01 
+Deleted a lot of lines of code in accordance to front end and back end:
+  -removed the API function as database will do it.
+  -fixed some variable names
+  -waiting for some correction with the currency functions-parameters and such
 
 huangP -- 2019-11-21 14:48
 Finished all of the database functions.
@@ -134,6 +156,12 @@ Added database functions:
   - get_currency(country) converts the country name to the currency code
   - get_currency_list(currency) returns a list of currencies that the given currency can be converted into,
     returning empty list if conversion is not available
+    
+chenE -- 2019-11-25 09:05
+Fixed the countries function:
+  -changed many different variables in accordance to the new database functions.
+  -get the list of possible currency conversions and spits it out
+  -took out more API stuff now that database can take information from the API
 
 wuJ -- 2019-11-25 09:14
 create account page showing this error: "Not Found
@@ -177,6 +205,9 @@ countries found so far:
 - Åland Islands
 add the nav bar to every page so we dont need to use the browser back button
 
+chenE -- 2019-11-26 09:16
+Added comments to app.py
+
 huangP -- 2019-11-26 11:52
 Fixed the issue with special characters in url by using the country alpha-3 code instead of its name as the url.
   - Updated all the functions and code related to it
@@ -188,8 +219,11 @@ error found when you press find out more on results page:
 "TypeError: 'NoneType' object is not subscriptable"
 
 huangP -- 2019-11-27 09:06
-Added comments to db_manager.py and db_builder.py
+Added comments to db_manager.py
 
-wuJ -- 2019-11-26 9:12
+wuJ -- 2019-11-27 9:12
 Design Doc update:
--removed APIs listed previously that we're no longer using
+-removed APIs listed previously that we're no longer using 
+
+chenE -- 2019-11-27 09:22
+Edited app.py such that the value inserted for currency needs to be checked for a double
