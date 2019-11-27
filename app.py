@@ -143,16 +143,12 @@ def countries(country):
                 value = ""
                 #if it does not return an empty string
             curr_2 = request.args['curr_2']
-<<<<<<< HEAD
-            currency_stats = "{} {} = {} {}".format(value, curr_1, db_manager.convert_currency(curr_1, value, curr_2), curr_2)
-=======
             #defines the second currency code
             if (value != ""):
                 currency_stats = "{} {} = {} {}".format(value, curr_1, db_manager.convert_currency(curr_1, value, curr_2), curr_2)
                 #goes through the database to find the rate, and the database converts the two rates, the answer is defined to currency_stats
             else:
                 currencry_stats = "Not convertable, did not enter a number."
->>>>>>> cd7de7b4acc8ee0ffd62fd5284d90c0832264549
     return render_template("country.html", stats = stats, currency_stats = currency_stats, valid_curr_rates = valid_curr_rates)
 
 @app.route("/logout")
