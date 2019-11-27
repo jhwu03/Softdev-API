@@ -25,12 +25,12 @@ def db_build():
     '''create all database tables if they do not already exist,
     and add all the countries to the countries list if it is not already there'''
     exec_cmd("CREATE TABLE IF NOT EXISTS users(username TEXT UNIQUE, password TEXT);")
-    exec_cmd("""CREATE TABLE IF NOT EXISTS countries(name TEXT UNIQUE,
+    exec_cmd("""CREATE TABLE IF NOT EXISTS countries(name TEXT UNIQUE COLLATE NOCASE,
                                                      alpha_2 TEXT UNIQUE,
                                                      alpha_3 TEXT UNIQUE,
                                                      region TEXT,
                                                      found INTEGER);""")
-    exec_cmd("""CREATE TABLE IF NOT EXISTS stat(name TEXT UNIQUE,
+    exec_cmd("""CREATE TABLE IF NOT EXISTS stat(name TEXT UNIQUE COLLATE NOCASE,
                                                 calling_code TEXT UNIQUE,
                                                 capital TEXT,
                                                 population INTEGER,
