@@ -151,11 +151,20 @@ def countries(country):
         if ('value' in request.args):
             #only converts if a value is given
             value = request.args['value']
-            #needs to ensure that it can be converted into a double
+            #defines value as the value that the user gives
+            try:
+                value = float(value)
+                #needs to ensure that it can be converted into a double. gets converted to double if no error is given
+            except:
+                value = ""
+                #if it does not return an empty string
             curr_2 = request.args['curr_2']
             #defines the second currency code
-            currency_stats = "{} {} = {} {}".format(value, curr_1, db_manager.convert_currency(curr_1, value, curr_2), curr_2)
-            #goes through the database to find the rate, and the database converts the two rates, the answer is defined to currency_stats
+            if (value != ""):
+                currency_stats = "{} {} = {} {}".format(value, curr_1, db_manager.convert_currency(curr_1, value, curr_2), curr_2)
+                #goes through the database to find the rate, and the database converts the two rates, the answer is defined to currency_stats
+            else:
+                currencry_stats = "Not convertable, did not enter a number."
     return render_template("country.html", stats = stats, currency_stats = currency_stats, valid_curr_rates = valid_curr_rates)
     #renders country.html with the dict of country stats, a string of currency stats, and a list of the valid currency exchanges
 
