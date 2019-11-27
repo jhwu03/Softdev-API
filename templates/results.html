@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block body %}
   {% for i in results %}
-    <a href="/countries/{{i}}">{{i}}</a>
+    <div class="card">
+      <img src="{{flags[i]}}" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">{{i}}</h5>
+        <a href="/countries/{{i}}" class="btn btn-primary">Find out more</a>
+      </div>
+    </div>
+    <br>
   {% endfor %}
 {% endblock %}
