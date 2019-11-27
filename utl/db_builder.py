@@ -3,6 +3,7 @@ import urllib.request, json
 from utl import db_manager
 
 def exec_cmd(command):
+    '''Opens the database, runs the given sqlite3 command, and closes the database'''
     database = sqlite3.connect("database.db")
     cur = database.cursor()
     cur.execute(command)
