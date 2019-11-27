@@ -180,3 +180,7 @@ add the nav bar to every page so we dont need to use the browser back button
 huangP -- 2019-11-26 11:52
 Fixed the issue with special characters in url by using the country alpha-3 code instead of its name as the url.
   - Updated all the functions and code related to it
+  
+wuJ -- 2019-11-27 8:55
+Found that continents are alphabetically ordered by continent
+need make sure to make that clear
