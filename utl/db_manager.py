@@ -199,25 +199,11 @@ def get_found_countries():
     cur = database.cursor()
     cur.execute("""SELECT stat.name, region FROM stat, countries
                 WHERE countries.name = stat.name AND found = 1;""")
-    africa = []
-    americas = []
-    asia = []
-    europe = []
-    oceania = []
+    found_countries = []
     for row in cur.fetchall():
-        if row[1] == 'Africa':
-            africa.append(row[0])
-        if row[1] == 'Americas':
-            americas.append(row[0])
-        if row[1] == 'Asia':
-            asia.append(row[0])
-        if row[1] == 'Europe':
-            europe.append(row[0])
-        if row[1] == 'Oceania':
-            oceania.append(row[0])
+        found_countries.append(row[0])
     close_db(database)
-    return {"Africa": africa, "Americas": americas,
-            "Asia": asia, "Europe": europe, "Oceania": oceania}
+    return found_countries
 
 def alpha_to_country(alpha_3):
     database = sqlite3.connect(DB_FILE)
