@@ -11,6 +11,8 @@ def exec_cmd(command):
     database.close()
 
 def add_regions(region):
+    '''adds all the countries and their alpha-2 and alpha-3 codes to the database
+    if they don't already exist'''
     u = urllib.request.urlopen("https://restcountries.eu/rest/v2/region/" +
                                region + "?fields=name;alpha2Code;alpha3Code")
     response = u.read()
@@ -20,6 +22,8 @@ def add_regions(region):
             db_manager.add_country(row['name'], row['alpha2Code'], row['alpha3Code'])
 
 def db_build():
+    '''create all database tables if they do not already exist,
+    and add all the countries to the countries list if it is not already there'''
     exec_cmd("CREATE TABLE IF NOT EXISTS users(username TEXT UNIQUE, password TEXT);")
     exec_cmd("""CREATE TABLE IF NOT EXISTS countries(name TEXT UNIQUE,
                                                      alpha_2 TEXT UNIQUE,

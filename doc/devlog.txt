@@ -188,8 +188,8 @@ error found when you press find out more on results page:
 "TypeError: 'NoneType' object is not subscriptable"
 
 huangP -- 2019-11-27 09:06
-Added comments to db_manager.py
+Added comments to db_manager.py and db_builder.py
 
 wuJ -- 2019-11-26 9:12
 Design Doc update:
--removed APIs listed previously that we're no longer using 
+-removed APIs listed previously that we're no longer using
