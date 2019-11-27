@@ -175,11 +175,11 @@ def add_country(country, alpha_2, alpha_3):
 def search_country(keyword):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("SELECT name FROM countries WHERE name LIKE '%' || ? || '%';",
+    cur.execute("SELECT name, alpha_3 FROM countries WHERE name LIKE '%' || ? || '%';",
                 (keyword,))
-    data = []
+    data = {}
     for row in cur.fetchall():
-        data.append(row[0])
+        data[row[0]] = row[1]
     close_db(database)
     return data
 
@@ -219,15 +219,23 @@ def get_found_countries():
     return {"Africa": africa, "Americas": americas,
             "Asia": asia, "Europe": europe, "Oceania": oceania}
 
-def get_country_stat(country):
-    country_url = country.replace(" ", "%20")
+def alpha_to_country(alpha_3):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
+    cur.execute("SELECT name FROM countries WHERE alpha_3 = ?;", (alpha_3,))
+    data = cur.fetchone()[0]
+    close_db(database)
+    return data
+
+def get_country_stat(alpha_3):
+    database = sqlite3.connect(DB_FILE)
+    cur = database.cursor()
+    country = alpha_to_country(alpha_3)
     if not has_stat(country):
-        url = urllib.request.urlopen("https://restcountries.eu/rest/v2/name/" + country_url +
+        url = urllib.request.urlopen("https://restcountries.eu/rest/v2/alpha/" + alpha_3 +
                                      "?fields=name;callingCodes;capital;population;languages;currencies;flag;region")
         response = url.read()
-        data = json.loads(response)[0]
+        data = json.loads(response)
         has_curr = 0
         currency = data['currencies'][0]['code']
         try:

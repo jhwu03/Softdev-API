@@ -132,14 +132,14 @@ def quiz():
     return render_template("quiz.html", results = db_manager.get_found_countries(), response = response)
     #renders quiz.html giving the list of the found countries as results, as well as a response as to whether their answer was correct or incorrect
 
-@app.route("/countries/<country>")
-def countries(country):
+@app.route("/countries/<alpha_3>")
+def countries(alpha_3):
     if "username" not in session:
     # if user is not logged in,
         return redirect(url_for("login"))
         # redirect to login page
-    stats = db_manager.get_country_stat(country)
-    #goes through the database to get the country stats
+    stats = db_manager.get_country_stat(alpha_3)
+    country = db_manager.alpha_to_country(alpha_3)
     currency_stats = ""
     #defines currency stats
     curr_1 = db_manager.get_currency(country)
