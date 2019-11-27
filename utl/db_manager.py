@@ -198,15 +198,15 @@ def has_stat(country):
     close_db(database)
     return data != None
 
-def add_stat(country, calling_code, cap, pop, lang, flag, curr, reg, has_curr):
+def add_stat(country, calling_code, cap, pop, lang, flag, curr, has_curr):
     '''if the stats for the given country is not in the database, add it to the database'''
     if not has_stat(country):
         database = sqlite3.connect(DB_FILE)
         cur = database.cursor()
         cur.execute("""INSERT INTO stat(name, calling_code, capital, population,
-                                        lang, flag, currency, region, conversion)
-                       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);""",
-                    (country, calling_code, cap, pop, lang, flag, curr, reg, has_curr))
+                                        lang, flag, currency, conversion)
+                       VALUES(?, ?, ?, ?, ?, ?, ?, ?);""",
+                    (country, calling_code, cap, pop, lang, flag, curr, has_curr))
         close_db(database)
 
 def has_country(country):
@@ -219,14 +219,14 @@ def has_country(country):
     close_db(database)
     return data != None
 
-def add_country(country, alpha_2, alpha_3):
+def add_country(country, alpha_2, alpha_3, region):
     '''add given country to countries table if it is is not already there'''
     if not has_country(country):
         database = sqlite3.connect(DB_FILE)
         cur = database.cursor()
-        cur.execute("""INSERT INTO countries(name, alpha_2, alpha_3, found)
-                       VALUES(?, ?, ?, ?);""",
-                    (country, alpha_2, alpha_3, 0))
+        cur.execute("""INSERT INTO countries(name, alpha_2, alpha_3, region, found)
+                       VALUES(?, ?, ?, ?, ?);""",
+                    (country, alpha_2, alpha_3, region, 0))
         close_db(database)
 
 def search_country(keyword):
@@ -262,8 +262,7 @@ def get_found_countries():
     values as the list of countries found in that region'''
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("""SELECT stat.name, region FROM stat, countries
-                WHERE countries.name = stat.name AND found = 1;""")
+    cur.execute("""SELECT name, region FROM countries WHERE found = 1 ;""")
     found_countries = []
     for row in cur.fetchall():
         found_countries.append(row[0])
@@ -290,7 +289,7 @@ def get_country_stat(alpha_3):
     if not has_stat(country):
     # if the stats are not already in database
         url = urllib.request.urlopen("https://restcountries.eu/rest/v2/alpha/" + alpha_3 +
-                                     "?fields=name;callingCodes;capital;population;languages;currencies;flag;region")
+                                     "?fields=name;callingCodes;capital;population;languages;currencies;flag")
         # open api
         response = url.read()
         data = json.loads(response)
@@ -307,7 +306,7 @@ def get_country_stat(alpha_3):
             # set the conversion code to 2
         add_stat(data['name'], data['callingCodes'][0], data['capital'], data['population'],
                  data['languages'][0]['name'], data['flag'], currency,
-                 data['region'], has_curr)
+                 has_curr)
         # add all the stats pulled from api and the conversion code to the database
     cur.execute("""SELECT stat.name, alpha_2, alpha_3, calling_code, capital,
                 population, lang, flag, currency, region FROM countries, stat
