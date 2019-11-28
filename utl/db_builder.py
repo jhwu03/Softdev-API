@@ -13,7 +13,7 @@ def exec_cmd(command):
 def add_countries():
     '''adds all the countries and their alpha-2 and alpha-3 codes to the database
     if they don't already exist'''
-    u = urllib.request.urlopen("https://restcountries.eu/rest/v2/?fields=name;alpha2Code;alpha3Code;region")
+    u = urllib.request.urlopen("""https://restcountries.eu/rest/v2/?fields=name;alpha2Code;alpha3Code;region""")
     response = u.read()
     data = json.loads(response)
     for row in data:
