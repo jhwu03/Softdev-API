@@ -1,5 +1,6 @@
 import sqlite3
-import urllib.request, json
+from urllib.request import urlopen
+import json
 from utl import db_manager
 
 def exec_cmd(command):
@@ -13,8 +14,8 @@ def exec_cmd(command):
 def add_countries():
     '''adds all the countries and their alpha-2 and alpha-3 codes to the database
     if they don't already exist'''
-    u = urllib.request.urlopen("""https://restcountries.eu/rest/v2/?fields=name;alpha2Code;alpha3Code;region""")
-    response = u.read()
+    url = urlopen("https://restcountries.eu/rest/v2/?fields=name;alpha2Code;alpha3Code;region")
+    response = url.read()
     data = json.loads(response)
     for row in data:
         # print(row)
@@ -31,13 +32,12 @@ def db_build():
                                                      region TEXT,
                                                      found INTEGER);""")
     exec_cmd("""CREATE TABLE IF NOT EXISTS stat(name TEXT UNIQUE COLLATE NOCASE,
-                                                calling_code TEXT UNIQUE,
+                                                calling_code TEXT,
                                                 capital TEXT,
                                                 population INTEGER,
                                                 lang TEXT,
                                                 flag TEXT,
-                                                currency TEXT,
-                                                conversion INTEGER);""")
+                                                currency TEXT);""")
     exec_cmd("""CREATE TABLE IF NOT EXISTS currency(currency_1 TEXT,
                                                     value_1 REAL,
                                                     currency_2 TEXT,

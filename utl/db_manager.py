@@ -1,8 +1,16 @@
 import sqlite3
-import urllib.request, json
+from urllib.request import urlopen
+import json
 from utl import db_builder
 
 DB_FILE = "database.db"
+
+CURRENCY_LIST = ["AED", "ARS", "AUD", "BGN", "BRL", "BSD", "CAD", "CHF", "CLP", "CNY",
+                 "COP", "CZK", "DKK", "DOP", "EGP", "EUR", "FJD", "GBP", "GTQ", "HKD",
+                 "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW", "KZT", "MXN",
+                 "MYR", "NOK", "NZD", "PAB", "PEN", "PHP", "PKR", "PLN", "PYG", "RON",
+                 "RUB", "SAR", "SEK", "SGD", "THB", "TRY", "TWD", "UAH", "USD", "UYU",
+                 "VND", "ZAR"]
 
 def close_db(database):
     '''commits and close database changes'''
@@ -60,6 +68,18 @@ def convert_currency(curr_1, value, curr_2):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
     # open database
+    if not has_currency(curr_1, curr_2):
+    # if conversion rate is not in database
+        url = urlopen("https://api.exchangerate-api.com/v4/latest/" + curr_1)
+        # open the api
+        response = url.read()
+        data = json.loads(response)['rates']
+        # read in all the available currencies and conversion rate
+        for curr in data:
+        # recursively add all the currencies and conversion rates to the database
+            if curr != curr_1:
+            # exclude the original currency from this
+                add_currency(curr_1, curr, data[curr])
     cur.execute("SELECT value_2 FROM currency WHERE currency_1 = ? AND currency_2 = ?;",
                 (curr_1, curr_2,))
     # choose the conversion rate from the currency table in database
@@ -83,7 +103,7 @@ def get_name_stats(name, alpha_2):
     # open database
     if not has_name(name, alpha_2):
     # if the name and country combo is not in the database
-        url = urllib.request.urlopen("https://api.agify.io/?name=" + name + "&country_id=" + alpha_2)
+        url = urlopen("https://api.agify.io/?name=" + name + "&country_id=" + alpha_2)
         # open the api
         response = url.read()
         data = json.loads(response)
@@ -154,39 +174,22 @@ def get_currency(country):
     close_db(database)
     return data
 
-def get_currency_list(currency):
-    '''returns the list of currencies in which the given currency can be converted into'''
+def has_currency(currency_1, currency_2):
+    '''returns true if conversion rate from currency_1 to currency_2 is in database'''
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    # open database
-    cur.execute("SELECT conversion FROM stat WHERE currency = ?;", (currency,))
-    has_curr = cur.fetchone()[0]
-    # get the conversion value of the given currency
-    if has_curr == 2:
-    # if the value is 2, meaning that conversions does not exist for the country,
-    # return an empty list
-        return []
-    if has_curr == 0:
-    # if the value is 0, meaning that conversions exist but are not pulled from the api
-        url = urllib.request.urlopen("https://api.exchangerate-api.com/v4/latest/" + currency)
-        # open the api
-        response = url.read()
-        data = json.loads(response)['rates']
-        # read in all the available currencies and conversion rate
-        for curr in data:
-        # recursively add all the currencies and conversion rates to the database
-            if curr != currency:
-            # exclude the original currency from this
-                add_currency(currency, curr, data[curr])
-    cur.execute("SELECT currency_2 FROM currency WHERE currency_1 = ?;", (currency,))
-    # select all the currencies that the given currency can be converted to
-    data = []
-    for curr in cur.fetchall():
-        data.append(curr[0])
-        # add the list of currencies to a list
+    cur.execute("SELECT * FROM currency WHERE currency_1 = ? AND currency_2 = ?;",
+                (currency_1, currency_2))
+    data = cur.fetchone()
     close_db(database)
-    # close database and return the list
-    return data
+    return data != None
+
+def get_currency_list(currency):
+    '''returns the list of currencies in which the given currency can be converted into'''
+    ans = []
+    if currency in CURRENCY_LIST:
+        ans = [x for x in CURRENCY_LIST if x != currency]
+    return ans
 
 def has_stat(country):
     '''returns True if the stats for the given country is in the database'''
@@ -198,15 +201,15 @@ def has_stat(country):
     close_db(database)
     return data != None
 
-def add_stat(country, calling_code, cap, pop, lang, flag, curr, has_curr):
+def add_stat(country, calling_code, cap, pop, lang, flag, curr):
     '''if the stats for the given country is not in the database, add it to the database'''
     if not has_stat(country):
         database = sqlite3.connect(DB_FILE)
         cur = database.cursor()
         cur.execute("""INSERT INTO stat(name, calling_code, capital, population,
-                                        lang, flag, currency, conversion)
-                       VALUES(?, ?, ?, ?, ?, ?, ?, ?);""",
-                    (country, calling_code, cap, pop, lang, flag, curr, has_curr))
+                                        lang, flag, currency)
+                       VALUES(?, ?, ?, ?, ?, ?, ?);""",
+                    (country, calling_code, cap, pop, lang, flag, curr))
         close_db(database)
 
 def has_country(country):
@@ -288,26 +291,17 @@ def get_country_stat(alpha_3):
     # set country to the name of the country with the alpha-3 code
     if not has_stat(country):
     # if the stats are not already in database
-        url = urllib.request.urlopen("https://restcountries.eu/rest/v2/alpha/" + alpha_3 +
-                                     "?fields=name;callingCodes;capital;population;languages;currencies;flag")
+        url = urlopen("https://restcountries.eu/rest/v2/alpha/" + alpha_3 +
+                      "?fields=name;callingCodes;capital;population;languages;currencies;flag")
         # open api
         response = url.read()
         data = json.loads(response)
         # load the json response
-        has_curr = 0
         currency = data['currencies'][0]['code']
         # set currency to the currency code
-        try:
-            urllib.request.urlopen("https://api.exchangerate-api.com/v4/latest/" + currency)
-            # try to get currency data from the exchange rate api
-        except Exception as e:
-        # if currency data is not there
-            has_curr = 2
-            # set the conversion code to 2
         add_stat(data['name'], data['callingCodes'][0], data['capital'], data['population'],
-                 data['languages'][0]['name'], data['flag'], currency,
-                 has_curr)
-        # add all the stats pulled from api and the conversion code to the database
+                 data['languages'][0]['name'], data['flag'], currency)
+        # add all the stats pulled from api to the database
     cur.execute("""SELECT stat.name, alpha_2, alpha_3, calling_code, capital,
                 population, lang, flag, currency, region FROM countries, stat
                 WHERE stat.name = ? AND countries.name = ?;""",
