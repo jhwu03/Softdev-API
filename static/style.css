@@ -1,0 +1,11 @@
+#bothforms {
+  text-align: center;
+}
+.navbarhead {
+  background-color: beige;
+}
+#beyondnavbar {
+  color: white;
+  text-align: center;
+  background: rgba(255,140,105,0.7);
+}
