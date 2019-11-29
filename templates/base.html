@@ -8,7 +8,9 @@
       {% endblock %}
       </title>
   </head>
-  <body>
+  {% block bodyformat %}
+    <body>
+  {% endblock %}
     {% block navbar %}
       <div class="navbarhead">
         <nav class="navbar navbar-expand-lg navbar-light">
