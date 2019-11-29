@@ -227,3 +227,9 @@ Design Doc update:
 
 chenE -- 2019-11-27 09:22
 Edited app.py such that the value inserted for currency needs to be checked for a double
+
+avrahamiB -- 2019-11-29 12:30
+Reorganized css and html inheritance:
+  Only 1 css file now
+  Put navbar at the top of all non-login pages and made them all the same
+Put a home button on the navbar
