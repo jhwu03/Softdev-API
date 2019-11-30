@@ -261,14 +261,14 @@ def found_country(country):
 
 def get_found_countries():
     '''returns a dictionary of all the countries found,
-    with the keys being the 5 different regions and
-    values as the list of countries found in that region'''
+    with the keys being the countries and the values being
+    the region the country is in'''
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
     cur.execute("""SELECT name, region FROM countries WHERE found = 1 ;""")
-    found_countries = []
+    found_countries = {}
     for row in cur.fetchall():
-        found_countries.append(row[0])
+        found_countries[row[0]] = row[1]
     close_db(database)
     return found_countries
 
