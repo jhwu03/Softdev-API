@@ -7,11 +7,12 @@
       <div class="progress-bar" role="progressbar" style="width: {{long/2.47}}%"></div>
   </div>
   <h1>247 countries! Can you get them all?</h1>
-  <h3>{{long}}/247</h3>  
+  <h3>{{long}}/247</h3>
   <form action="/quiz">
     Country:
     <input type="text" name="country">
     <input type="submit" value="Check" name="check">
+    <input type="submit" name="reset" value="Reset Quiz">
   </form>
   <table class="table">
     <thead>
@@ -19,7 +20,7 @@
       <th scope="col">Continent</th>
     </thead>
   {% for i in results %}
-    {% if i == response %}
+    {% if i|lower == response|lower %}
       <tr id="latestcorrect">
     {% else %}
       <tr>

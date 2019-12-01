@@ -68,7 +68,7 @@ Updated database:
   - wrote and merge get_alpha_3 and get_alpha_2 together into get_alpha to prevent writing duplicate code
 Updated design doc:
   - The changes made above to database (shortening table name and merging alpha-2 and alpha-3 functions) have been reflected in design doc
-  
+
 chenE -- 2019-11-21 09:14
 Wrote and tested some API stuff, getting API's for each country and add them to the database
 
@@ -82,7 +82,7 @@ wuJ -- 2019-11-21 09:27
 updated README with API and instructions on how to run
 still need to add hyperlinks to each API
 
-chenE -- 2019-11-21 12:01 
+chenE -- 2019-11-21 12:01
 Deleted a lot of lines of code in accordance to front end and back end:
   -removed the API function as database will do it.
   -fixed some variable names
@@ -156,7 +156,7 @@ Added database functions:
   - get_currency(country) converts the country name to the currency code
   - get_currency_list(currency) returns a list of currencies that the given currency can be converted into,
     returning empty list if conversion is not available
-    
+
 chenE -- 2019-11-25 09:05
 Fixed the countries function:
   -changed many different variables in accordance to the new database functions.
@@ -223,10 +223,16 @@ Added comments to db_manager.py
 
 wuJ -- 2019-11-27 9:12
 Design Doc update:
--removed APIs listed previously that we're no longer using 
+-removed APIs listed previously that we're no longer using
 
 chenE -- 2019-11-27 09:22
 Edited app.py such that the value inserted for currency needs to be checked for a double
+
+huangP -- 2019-11-28 20:49
+Reorganized database to reduce lag by consulting a list of valid currencies for conversion
+instead of checking with the API every time
+Added link so that clicking team name would return to homepage
+Removed an extra endblock from country.html
 
 avrahamiB -- 2019-11-29 12:30
 Reorganized css and html inheritance:
@@ -237,3 +243,9 @@ Put a home button on the navbar
 avrahamiB -- 2019-11-30 19:03
 Put all correct answers of the quiz in a table showing their name and region
 The most recent answer (if correct) is highlighted
+
+huangP -- 2019-12-01 09:43
+Added a table to cache the countries found by the users. This allows multiple users to play their own quiz
+and their progress is stored even if they logout.
+Updated quiz.html so that the check is case insensitive but displays the correctly capitalized country name
+Added a button to reset the quiz.

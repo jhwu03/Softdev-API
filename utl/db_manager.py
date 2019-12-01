@@ -91,9 +91,12 @@ def convert_currency(curr_1, value, curr_2):
     # close database and return the product of the value and rate
     return value * rate[0]
 
-def reset_quiz():
-    '''resets the quiz by setting all found values to 0 in countries table'''
-    db_builder.exec_cmd("UPDATE countries SET found = 0;")
+def reset_quiz(username):
+    '''resets the quiz for a user by deleting all the rows in quiz table with the given username'''
+    database = sqlite3.connect(DB_FILE)
+    cur = database.cursor()
+    cur.execute("DELETE FROM quiz WHERE name = ?;", (username,))
+    close_db(database)
 
 def get_name_stats(name, alpha_2):
     '''returns the number of people and average age of people with the name in the given country,
@@ -227,9 +230,9 @@ def add_country(country, alpha_2, alpha_3, region):
     if not has_country(country):
         database = sqlite3.connect(DB_FILE)
         cur = database.cursor()
-        cur.execute("""INSERT INTO countries(name, alpha_2, alpha_3, region, found)
-                       VALUES(?, ?, ?, ?, ?);""",
-                    (country, alpha_2, alpha_3, region, 0))
+        cur.execute("""INSERT INTO countries(name, alpha_2, alpha_3, region)
+                       VALUES(?, ?, ?, ?);""",
+                    (country, alpha_2, alpha_3, region))
         close_db(database)
 
 def search_country(keyword):
@@ -245,30 +248,33 @@ def search_country(keyword):
     close_db(database)
     return data
 
-def found_country(country):
-    '''returns the country name if the given country is valid and
-    sets its found value in database to 0,
-    returns an empty string if the country name is not valid'''
+def found_country(country, username):
+    '''returns the country name if the given country is valid and is not already found
+    returns an empty string if the country name is not valid or is already found by user'''
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("SELECT * FROM countries WHERE name = ?;", (country,))
+    cur.execute("SELECT name, region FROM countries WHERE name = ?;", (country,))
+    stat = cur.fetchone()
+    cur.execute("SELECT * FROM quiz WHERE country = ? AND name = ?;", (country, username,))
     data = ""
-    if not cur.fetchone() is None:
-        cur.execute("UPDATE countries SET found = 1 WHERE name = ?;", (country,))
+    if stat is not None and cur.fetchone() is None:
+        cur.execute("INSERT INTO quiz(name, country, region) VALUES(?, ?, ?)",
+                    (username, stat[0], stat[1],))
         data = country
     close_db(database)
     return data
 
-def get_found_countries():
-    '''returns a dictionary of all the countries found,
+def get_found_countries(username):
+    '''returns a dictionary of all the countries found by user,
     with the keys being the countries and the values being
     the region the country is in'''
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("""SELECT name, region FROM countries WHERE found = 1 ;""")
+    cur.execute("SELECT country, region FROM quiz WHERE name = ?;", (username,))
     found_countries = {}
     for row in cur.fetchall():
         found_countries[row[0]] = row[1]
+        print(row[1])
     close_db(database)
     return found_countries
 

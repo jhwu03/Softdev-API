@@ -29,8 +29,7 @@ def db_build():
     exec_cmd("""CREATE TABLE IF NOT EXISTS countries(name TEXT UNIQUE COLLATE NOCASE,
                                                      alpha_2 TEXT UNIQUE,
                                                      alpha_3 TEXT UNIQUE,
-                                                     region TEXT,
-                                                     found INTEGER);""")
+                                                     region TEXT);""")
     exec_cmd("""CREATE TABLE IF NOT EXISTS stat(name TEXT UNIQUE COLLATE NOCASE,
                                                 calling_code TEXT,
                                                 capital TEXT,
@@ -46,6 +45,9 @@ def db_build():
                                                 code TEXT,
                                                 count INTEGER,
                                                 age INTEGER);""")
+    exec_cmd("""CREATE TABLE IF NOT EXISTS quiz(name TEXT,
+                                                country TEXT,
+                                                region TEXT);""")
     database = sqlite3.connect("database.db")
     cur = database.cursor()
     cur.execute("SELECT EXISTS(SELECT 1 FROM countries);")
