@@ -18,7 +18,11 @@
       <th scope="col">Continent</th>
     </thead>
   {% for i in results %}
-    <tr>
+    {% if i == response %}
+      <tr id="latestcorrect">
+    {% else %}
+      <tr>
+    {% endif %}
       <td>{{i}}</td>
       <td>{{results[i]}}</td>
     </tr>
