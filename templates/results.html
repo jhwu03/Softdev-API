@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
+  <div class="container-lg">
+  <div class="row">
   {% for i in results %}
+  <div class="col-4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">{{i}}</h5>
@@ -8,5 +11,8 @@
       </div>
     </div>
     <br>
+  </div>
   {% endfor %}
+  </div>
+  </div>
 {% endblock %}

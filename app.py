@@ -117,7 +117,8 @@ def quiz():
         country = request.args['country']
         if (db_manager.has_country(country)):
             response = db_manager.found_country(country)
-    return render_template("quiz.html", results = db_manager.get_found_countries(), response = response)
+    results = db_manager.get_found_countries()
+    return render_template("quiz.html", results = results, response = response, long = len(results))
 
 @app.route("/countries/<country_code>")
 def countries(country_code):
