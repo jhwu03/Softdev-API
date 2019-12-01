@@ -1,6 +1,5 @@
-import sqlite3
+import sqlite3, json
 from urllib.request import urlopen
-import json
 from utl import db_builder
 
 DB_FILE = "database.db"
@@ -274,7 +273,6 @@ def get_found_countries(username):
     found_countries = {}
     for row in cur.fetchall():
         found_countries[row[0]] = row[1]
-        print(row[1])
     close_db(database)
     return found_countries
 

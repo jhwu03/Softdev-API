@@ -1,6 +1,5 @@
-import sqlite3
+import sqlite3, json
 from urllib.request import urlopen
-import json
 from utl import db_manager
 
 def exec_cmd(command):
