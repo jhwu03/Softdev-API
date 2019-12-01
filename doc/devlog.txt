@@ -233,3 +233,7 @@ Reorganized css and html inheritance:
   Only 1 css file now
   Put navbar at the top of all non-login pages and made them all the same
 Put a home button on the navbar
+
+avrahamiB -- 2019-11-30 19:03
+Put all correct answers of the quiz in a table showing their name and region
+The most recent answer (if correct) is highlighted
