@@ -249,3 +249,7 @@ Added a table to cache the countries found by the users. This allows multiple us
 and their progress is stored even if they logout.
 Updated quiz.html so that the check is case insensitive but displays the correctly capitalized country name
 Added a button to reset the quiz.
+
+huangP -- 2019-12-01 11:16
+Added a link to quiz page on navbar.
+Made the textbox autofocus for quiz page so user doesn't have to click the textbox every time to enter a country.
