@@ -269,7 +269,7 @@ def get_found_countries(username):
     the region the country is in'''
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("SELECT country, region FROM quiz WHERE name = ?;", (username,))
+    cur.execute("SELECT country, region FROM quiz WHERE name = ? ORDER BY country;", (username,))
     found_countries = {}
     for row in cur.fetchall():
         found_countries[row[0]] = row[1]
