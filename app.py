@@ -103,7 +103,7 @@ def search():
     if 'keyword' in request.args:
         keyword = request.args['keyword']
         results = db_manager.search_country(keyword)
-        return render_template("results.html", results = results, title = "Results for {}".format(keyword))
+        return render_template("results.html", results = results, title = "Results for \"{}\"".format(keyword))
     return render_template("results.html", results = results, title = "Results")
 
 
