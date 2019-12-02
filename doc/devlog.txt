@@ -256,3 +256,6 @@ Made the textbox autofocus for quiz page so user doesn't have to click the textb
 
 wuJ -- 2019-12-02 9:05 
 results page need to be titled
+
+chenE -- 2019-12-02 9:10
+added the title for the results page
