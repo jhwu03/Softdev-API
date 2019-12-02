@@ -12,9 +12,13 @@
     <br>
   {% endfor %}
   <br>
-  Currency rates:
-  {% for i in valid_curr_rates %}
-    {{i}}
-    <br>
-  {% endfor %}
+  <form action="/countries/{{stats['alpha_3']}}" method="GET">
+    <select class="form-control" id="curr_2">
+      {% for i in valid_curr_rates %}
+        <option>{{i}}</option>
+      {% endfor %}
+    </select>
+  <input type="text" class="form-control" id="value">
+  <input type="submit" id="submit">
+</form>
 {% endblock %}
