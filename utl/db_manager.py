@@ -59,7 +59,7 @@ def verify_login(username, password):
     return message
 
 def convert_currency(curr_1, value, curr_2):
-    '''return the value converted from curr_2 to curr_1,
+    '''return the value converted from curr_1 to curr_2,
     return -1 if an error occured (either value is negative or currency does not exist)'''
     if value < 0:
     # if the given value is less than 0, return -1
@@ -144,12 +144,12 @@ def add_name(name, country, count, age):
                     (name, country, count, age,))
         close_db(database)
 
-def get_alpha(country, type):
+def get_alpha(country, value):
     '''returns either the alpha_2 or alpha_3 code for the given country,
     based on the type given (either "2" or "3")'''
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
-    cur.execute("SELECT alpha_" + type + " FROM countries WHERE name = ?;", (country,))
+    cur.execute("SELECT alpha_" + value + " FROM countries WHERE name = ?;", (country,))
     ans = ""
     data = cur.fetchone()
     if data is not None:
@@ -164,7 +164,6 @@ def add_currency(currency_1, currency_2, rate):
     cur.execute("""INSERT INTO currency(currency_1, value_1, currency_2, value_2)
                    VALUES(?, ?, ?, ?);""",
                 (currency_1, 1, currency_2, rate,))
-    cur.execute("UPDATE stat SET conversion = 1 WHERE currency = ?;", (currency_1,))
     close_db(database)
 
 def get_currency(country):

@@ -7,10 +7,7 @@
   {% endfor %}
   <br>
   Currency stats (not used until converter called):
-  {% for i in currency_stats %}
-    {{i}}
-    <br>
-  {% endfor %}
+  {{currency_stats}}
   <br>
   <form action="/countries/{{stats['alpha_3']}}" method="GET">
     <select class="form-control" name="curr_2">
