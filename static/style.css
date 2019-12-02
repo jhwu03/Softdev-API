@@ -1,6 +1,3 @@
-#bothforms {
-  text-align: center;
-}
 .navbarhead {
   background-color: beige;
 }
@@ -14,4 +11,7 @@
 }
 #latestcorrect {
   background-color: oldlace;
+}
+.centered {
+  text-align: center;
 }

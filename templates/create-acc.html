@@ -5,7 +5,7 @@
 {% block navbar %}
 {% endblock %}
 {% block body %}
-  <form method="GET">
+  <form method="GET" class="centered">
     <label>Enter Username</label>
     <input type="text" name="username">
     <br>
@@ -18,7 +18,7 @@
     <br>
     <input type="submit" value="Submit">
   </form>
-  <form action = "/login">
+  <form action = "/login" class="centered">
     <input type = "submit" value = "Return to Login">
   </form>
 {% endblock %}

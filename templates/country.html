@@ -1,12 +1,19 @@
 {% extends "base.html" %}
 {% block body %}
-   Stats:
-  {% for i in stats %}
-    {{i}} -- {{stats[i]}}
-    <br>
-  {% endfor %}
+  <img src="{{stats['flag']}}" width="500" height="333">
+  <br> 
+  Name -- {{stats['name']}}
   <br>
-  Currency stats (not used until converter called):
+  Calling Code -- {{stats['calling_code']}}
+  <br>
+  Population -- {{stats['population']}}
+  <br>
+  Official Language -- {{stats['language']}}
+  <br>
+  Currency Code -- {{stats['currency']}}
+  <br>
+  Region -- {{stats['region']}}
+  <br><br>
   {{currency_stats}}
   <br>
   <form action="/countries/{{stats['alpha_3']}}" method="GET">
