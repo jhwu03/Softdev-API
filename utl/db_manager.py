@@ -170,6 +170,7 @@ def get_alpha(country, value):
     close_db(database)
     return ans
 
+
 def add_currency(currency_1, currency_2, rate):
     '''add the given currencies and their conversion rate into the database'''
     database = sqlite3.connect(DB_FILE)
@@ -287,6 +288,15 @@ def get_found_countries(username):
         found_countries[row[0]] = row[1]
     close_db(database)
     return found_countries
+
+def name_alpha_to_country(alpha_2):
+    '''return the country name for the given alpha-2 code'''
+    database = sqlite3.connect(DB_FILE)
+    cur = database.cursor()
+    cur.execute("SELECT name FROM countries WHERE alpha_2 = ?;", (alpha_2,))
+    data = cur.fetchone()[0]
+    close_db(database)
+    return data
 
 def alpha_to_country(alpha_3):
     '''return the country name for the given alpha-3 code'''

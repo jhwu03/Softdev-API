@@ -24,18 +24,18 @@
     </div>
     <div class="card-body align-items-center">
       {% if response == "" %}
-        {% for i in name_stats %}
-          {{i}}
-        {% endfor %}
+        In {{country}}, there are {{name_stats[0]}} people with the name {{name}} in the database, with an average age of {{name_stats[1]}}
       {% else %}
         {{response}}
       {% endif %}
       <form action="/home">
         <div class="form-row">
           <div class="col-auto">
+            Enter the name you wish to see:
             <input class="form-control" type="text" name="name">
           </div>
           <div class="col-auto">
+            And in what country?
             <select class="form-control" style="width:auto;" name="country">
               {% for i in country_list %}
                 <option>{{i}}</option>

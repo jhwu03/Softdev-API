@@ -271,3 +271,8 @@ Updated design doc to include the functions where the parameters changed and upd
 
 huangP -- 2019-12-03 08:38
 Updated design doc: removed the API that we are not using
+
+avrahamiB -- 2019-12-03 18:15
+Made the choices for the name API use the full name instead of the 2-letter abbreviation
+Put in more text so that the user knows what choices to make
+

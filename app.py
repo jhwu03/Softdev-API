@@ -88,14 +88,23 @@ def home():
     user = session["username"]
     #user is set to the person logged in
     name_stats = []
-    response = ""
+    name = ""
+    country = ""
+    response = " "
     if 'name' in request.args:
         #made a request to get info on name
-        if request.args['name'] == "":
+        name = request.args['name']
+        country = request.args['country']
+        if name == "":
             response = "Please enter a name:"
         else:
-            name_stats = db_manager.get_name_stats(request.args['name'], request.args['country'])
-    return render_template("homepage.html", username=user, name_stats=name_stats, country_list=db_manager.get_name_country_list(), response=response)
+            response = ""
+            name_stats = db_manager.get_name_stats(name, db_manager.get_alpha(country, 2))
+    country_list = db_manager.get_name_country_list()
+    new_country_list = []
+    for i in country_list:
+        new_country_list.append(db_manager.name_alpha_to_country(i))
+    return render_template("homepage.html", username=user, name_stats=name_stats, country_list=new_country_list, response=response, name=name, country=country)
 
 @app.route("/search")
 def search():
