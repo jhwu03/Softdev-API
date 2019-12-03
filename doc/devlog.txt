@@ -268,3 +268,6 @@ huangP -- 2019-12-02 10:11
 Remove a line of code that causes the website to crash (column called in db_manager did not exist)
 Updated country.html so that currency conversions are displayed to 2 decimal places
 Updated design doc to include the functions where the parameters changed and update the database tables in design doc
+
+huangP -- 2019-12-03 08:38
+Updated design doc: removed the API that we are not using
