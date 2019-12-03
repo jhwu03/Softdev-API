@@ -17,4 +17,13 @@
       </div>
     </div>
   </div>
+  <br><br><br><br>
+  {% for i in name_stats %}
+    {{i}}
+  {% endfor %}
+  <form action="/home">
+    <input type="text" name="name">
+    <input type="text" name="country">
+    <input type="submit" name="submit">
+  </form>
 {% endblock %}
