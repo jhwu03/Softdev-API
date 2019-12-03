@@ -3,9 +3,11 @@
   {{ stats['name'] }}
 {% endblock %}
 {% block body %}
-  <h1 class="text-center">{{stats['name']}}</h1>
-  <br>
-  <img class="img-thumbnail" src="{{stats['flag']}}" width="500" height="333">
+  <div class="text-center">
+    <h1>{{stats['name']}}</h1>
+    <br>
+    <img class="img-thumbnail" src="{{stats['flag']}}" width="500" height="333">
+  </div>
   <br>
   <br>
   Calling Code -- {{stats['calling_code']}}
