@@ -1,7 +1,10 @@
 {% extends "base.html" %}
+{% block title %}
+  {{ stats['name'] }}
+{% endblock %}
 {% block body %}
   <img src="{{stats['flag']}}" width="500" height="333">
-  <br> 
+  <br>
   Name -- {{stats['name']}}
   <br>
   Calling Code -- {{stats['calling_code']}}
