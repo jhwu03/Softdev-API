@@ -149,10 +149,10 @@ def countries(country_code):
             #defines the second currency code
             if (value != ""):
                 converted_val = db_manager.convert_currency(curr_1, value, curr_2)
-                if converted_val != -1:
+                if value >= 0.01:
                     currency_stats = "{:.2f} {} = {:.2f} {}".format(value, curr_1, converted_val, curr_2)
                 else:
-                    currency_stats = "Not convertible, please enter a positive number."
+                    currency_stats = "Not convertible, please enter a number greater than or equal to 0.01."
                 #goes through the database to find the rate, and the database converts the two rates, the answer is defined to currency_stats
             else:
                 currency_stats = "Not convertable, did not enter a number."
