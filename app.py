@@ -118,8 +118,7 @@ def quiz():
         db_manager.reset_quiz(session['username'])
     if 'country' in request.args:
         country = request.args['country']
-        if (db_manager.has_country(country)):
-            response = db_manager.found_country(country, session['username'])
+        response = db_manager.found_country(country, session['username'])
     results = db_manager.get_found_countries(session['username'])
     return render_template("quiz.html", results = results, response = response, long = len(results))
 

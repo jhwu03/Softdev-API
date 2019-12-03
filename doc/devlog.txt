@@ -263,3 +263,8 @@ added the title for the results page
 avrahamiB -- 2019-12-02 9:25
 Created a form to choose which currency and what amount to convert to
 Values of both stored in a GET request back to the same page
+
+huangP -- 2019-12-02 10:11
+Remove a line of code that causes the website to crash (column called in db_manager did not exist)
+Updated country.html so that currency conversions are displayed to 2 decimal places
+Updated design doc to include the functions where the parameters changed and update the database tables in design doc
