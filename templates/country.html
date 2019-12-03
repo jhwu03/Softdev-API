@@ -22,13 +22,15 @@
   <br><br>
   {{currency_stats}}
   <br>
-  <form action="/countries/{{stats['alpha_3']}}" method="GET">
-    <select class="form-control" name="curr_2">
-      {% for i in valid_curr_rates %}
-        <option>{{i}}</option>
-      {% endfor %}
-    </select>
-  <input type="text" class="form-control" name="value">
-  <input type="submit" name="submit">
-</form>
+  {% if valid_curr_rates != [] %}
+    <form action="/countries/{{stats['alpha_3']}}" method="GET">
+      <select class="form-control" name="curr_2">
+        {% for i in valid_curr_rates %}
+          <option>{{i}}</option>
+        {% endfor %}
+      </select>
+    <input type="text" class="form-control" name="value">
+    <input type="submit" name="submit">
+  </form>
+  {% endif %}
 {% endblock %}
