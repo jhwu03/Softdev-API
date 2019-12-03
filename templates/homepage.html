@@ -18,20 +18,37 @@
     </div>
   </div>
   <br><br><br><br>
-  {% if response == "" %}
-    {% for i in name_stats %}
-      {{i}}
-    {% endfor %}
-  {% else %}
-    {{response}}
-  {% endif %}
-  <form action="/home">
-    <input type="text" name="name">
-    <select class="form-control" name="country">
-      {% for i in country_list %}
-        <option>{{i}}</option>
-      {% endfor %}
-    </select>
-    <input type="submit" name="submit">
-  </form>
+  <div class="card" style="width:30rem;margin:0 auto;">
+    <div class="card-header text-center">
+      Find the Average Age of a Name
+    </div>
+    <div class="card-body align-items-center">
+      {% if response == "" %}
+        {% for i in name_stats %}
+          {{i}}
+        {% endfor %}
+      {% else %}
+        {{response}}
+      {% endif %}
+      <form action="/home">
+        <div class="form-row">
+          <div class="col-auto">
+            <input class="form-control" type="text" name="name">
+          </div>
+          <div class="col-auto">
+            <select class="form-control" style="width:auto;" name="country">
+              {% for i in country_list %}
+                <option>{{i}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-auto">
+            <input class="btn btn-dark" type="submit" name="submit">
+          </div>
+        </div>
+      </form>
+      <br>
+      <br>
+    </div>
+  </div>
 {% endblock %}
