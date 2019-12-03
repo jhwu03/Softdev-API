@@ -88,10 +88,14 @@ def home():
     user = session["username"]
     #user is set to the person logged in
     name_stats = []
+    response = ""
     if 'name' in request.args:
         #made a request to get info on name
-        name_stats = db_manager.get_name_stats(request.args['name'], request.args['country'])
-    return render_template("homepage.html", username=user, name_stats=name_stats)
+        if request.args['name'] == "":
+            response = "Please enter a name:"
+        else:
+            name_stats = db_manager.get_name_stats(request.args['name'], request.args['country'])
+    return render_template("homepage.html", username=user, name_stats=name_stats, country_list=db_manager.get_name_country_list(), response=response)
 
 @app.route("/search")
 def search():

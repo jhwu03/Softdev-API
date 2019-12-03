@@ -10,6 +10,8 @@ CURRENCY_LIST = ["AED", "ARS", "AUD", "BGN", "BRL", "BSD", "CAD", "CHF", "CLP", 
                  "MYR", "NOK", "NZD", "PAB", "PEN", "PHP", "PKR", "PLN", "PYG", "RON",
                  "RUB", "SAR", "SEK", "SGD", "THB", "TRY", "TWD", "UAH", "USD", "UYU",
                  "VND", "ZAR"]
+NOT_NAME = ["AX", "BQ", "CW", "HM", "SS", "SX", "TF", "UM", "XK"]
+ALPHA_LIST = []
 
 def close_db(database):
     '''commits and close database changes'''
@@ -96,6 +98,17 @@ def reset_quiz(username):
     cur = database.cursor()
     cur.execute("DELETE FROM quiz WHERE name = ?;", (username,))
     close_db(database)
+
+def get_name_country_list():
+    '''returns the list of the alpha_2 country codes that Agify.io has data for'''
+    if ALPHA_LIST == []:
+        database = sqlite3.connect(DB_FILE)
+        cur = database.cursor()
+        cur.execute("SELECT alpha_2 FROM countries ORDER BY alpha_2;")
+        for row in cur.fetchall():
+            if row[0] not in NOT_NAME:
+                ALPHA_LIST.append(row[0])
+    return ALPHA_LIST
 
 def get_name_stats(name, alpha_2):
     '''returns the number of people and average age of people with the name in the given country,

@@ -18,12 +18,20 @@
     </div>
   </div>
   <br><br><br><br>
-  {% for i in name_stats %}
-    {{i}}
-  {% endfor %}
+  {% if response == "" %}
+    {% for i in name_stats %}
+      {{i}}
+    {% endfor %}
+  {% else %}
+    {{response}}
+  {% endif %}
   <form action="/home">
     <input type="text" name="name">
-    <input type="text" name="country">
+    <select class="form-control" name="country">
+      {% for i in country_list %}
+        <option>{{i}}</option>
+      {% endfor %}
+    </select>
     <input type="submit" name="submit">
   </form>
 {% endblock %}
