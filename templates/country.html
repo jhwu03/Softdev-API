@@ -20,17 +20,33 @@
   <br>
   Region -- {{stats['region']}}
   <br><br>
-  {{currency_stats}}
   <br>
   {% if valid_curr_rates != [] %}
+  <h3>Currency Converter</h3>
+  {{currency_stats}}
     <form action="/countries/{{stats['alpha_3']}}" method="GET">
-      <select class="form-control" name="curr_2">
-        {% for i in valid_curr_rates %}
-          <option>{{i}}</option>
-        {% endfor %}
-      </select>
-    <input type="text" class="form-control" name="value">
-    <input type="submit" name="submit">
+      <div class="form-group row">
+        <label for="value" class="col-auto col-form-label">Convert</label>
+        <div class="col-auto">
+          <input type="text" class="form-control" id="value" name="value">
+        </div>
+        <label for="curr_2" class="col-auto col-form-label">{{stats['currency']}} to </label>
+        <div class="col-auto">
+          <select class="form-control" id="curr_2" name="curr_2">
+            {% for i in valid_curr_rates %}
+              {% if curr_2 == i %}
+              <option selected="selected">
+              {% else %}
+              <option>
+              {% endif %}
+              {{i}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-auto">
+          <input class="btn btn-primary" type="submit" name="submit">
+        </div>
+      </div>
   </form>
   {% endif %}
 {% endblock %}

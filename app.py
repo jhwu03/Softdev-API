@@ -146,6 +146,7 @@ def countries(country_code):
     currency_stats = ""
     curr_1 = db_manager.get_currency(country)
     valid_curr_rates = db_manager.get_currency_list(curr_1)
+    curr_2 = ""
     if ('curr_2' in request.args):
         #made a request to change currencies
         if ('value' in request.args):
@@ -162,14 +163,14 @@ def countries(country_code):
             #defines the second currency code
             if (value != ""):
                 converted_val = db_manager.convert_currency(curr_1, value, curr_2)
-                if value >= 0.01:
+                if value >= 0.01 or value == 0:
                     currency_stats = "{:.2f} {} = {:.2f} {}".format(value, curr_1, converted_val, curr_2)
                 else:
-                    currency_stats = "Not convertible, please enter a number greater than or equal to 0.01."
+                    currency_stats = "Not convertible, please enter a valid number."
                 #goes through the database to find the rate, and the database converts the two rates, the answer is defined to currency_stats
             else:
                 currency_stats = "Not convertable, did not enter a number."
-    return render_template("country.html", stats = stats, currency_stats = currency_stats, valid_curr_rates = valid_curr_rates)
+    return render_template("country.html", stats = stats, currency_stats = currency_stats, valid_curr_rates = valid_curr_rates, curr_2=curr_2)
 
 @app.route("/logout")
 def logout():
