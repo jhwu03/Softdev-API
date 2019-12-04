@@ -7,6 +7,11 @@
       <div class="progress-bar" role="progressbar" style="width: {{long/2.47}}%"></div>
   </div>
   <h1>250 countries! Can you get them all?</h1>
+  {% if long == 250 %}
+    <div class="alert alert-success">
+      You have successfully completed the quiz! Click Reset Quiz to play again!
+    </div>
+  {% endif %}
   <h3>{{long}}/250</h3>
   <form action="/quiz">
     Country:
