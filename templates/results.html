@@ -1,21 +1,27 @@
 {% extends "base.html" %}
 {% block title %}
-  {{ title }}
+  Results
 {% endblock %}
 {% block body %}
   <div class="container-fluid">
-  <div class="row">
-  {% for i in results %}
-  <div class="col-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{i}}</h5>
-        <a href="/countries/{{results[i]}}" class="btn btn-primary">Find out more</a>
+    <h1 class="centered">{{title}}</h1>
+    <div class="row">
+    {% for i in results %}
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{i}}</h5>
+          <a href="/countries/{{results[i]}}" class="btn btn-primary">Find out more</a>
+        </div>
       </div>
+      <br>
     </div>
-    <br>
-  </div>
-  {% endfor %}
-  </div>
+    {% endfor %}
+    {% if results == {} %}
+      <div class="alert alert-danger centered" style="width:100%">
+        No countries have been found. Please search again with different keyword(s).
+      </div>
+    {% endif %}
+    </div>
   </div>
 {% endblock %}

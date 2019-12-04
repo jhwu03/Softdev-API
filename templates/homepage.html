@@ -39,7 +39,12 @@
             And in what country?
             <select class="form-control" style="width:auto;" name="country">
               {% for i in country_list %}
-                <option>{{i}}</option>
+              {% if country == i %}
+              <option selected="selected">
+              {% else %}
+              <option>
+              {% endif %}
+              {{i}}</option>
               {% endfor %}
             </select>
           </div>

@@ -116,9 +116,10 @@ def get_name_stats(name, alpha_2):
     database = sqlite3.connect(DB_FILE)
     cur = database.cursor()
     # open database
+    name_url = name.replace(" ", "%20")
     if not has_name(name, alpha_2):
     # if the name and country combo is not in the database
-        url = urlopen("https://api.agify.io/?name=" + name + "&country_id=" + alpha_2)
+        url = urlopen("https://api.agify.io/?name=" + name_url + "&country_id=" + alpha_2)
         # open the api
         response = url.read()
         data = json.loads(response)

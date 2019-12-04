@@ -289,5 +289,10 @@ Added a message for user when they finish quiz
 Added a footer
 
 wuJ -- 2019-12-03 23:30
-removed APIs in the README that we're no longer using 
+removed APIs in the README that we're no longer using
 *** WE NEED TO UPDATE DESIGN DOC SO IT DOESNT MENTION THE APIs WE DONT USE***
+
+huangP -- 2019-12-04 00:57
+Updated design doc so that it only mentions the APIs we used
+Fixed bug where a space in the inputed name for getting the average age crashes the site.
+Added error messsage that shows when search results return nothing.
