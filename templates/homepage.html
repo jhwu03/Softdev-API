@@ -13,7 +13,7 @@
         <br>
         <br>
         <p>Click the following link to go to the quiz:</p>
-        <a href="/quiz">Countries Quiz</a>
+        <a href="/quiz" style="color:lightcyan;">Countries Quiz</a>
       </div>
     </div>
   </div>
@@ -35,6 +35,7 @@
             <input class="form-control" type="text" name="name">
           </div>
           <div class="col-auto">
+            <br>
             And in what country?
             <select class="form-control" style="width:auto;" name="country">
               {% for i in country_list %}
@@ -43,12 +44,11 @@
             </select>
           </div>
           <div class="col-auto">
+            <br>
             <input class="btn btn-dark" type="submit" name="submit">
           </div>
         </div>
       </form>
-      <br>
-      <br>
     </div>
   </div>
 {% endblock %}
