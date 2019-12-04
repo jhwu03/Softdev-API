@@ -287,3 +287,7 @@ Fixed small bug in app.py where the parameters were the wrong type (int instead 
 Added a lot of Bootstrap to make page look nicer
 Added a message for user when they finish quiz
 Added a footer
+
+wuJ -- 2019-12-03 23:30
+removed APIs in the README that we're no longer using 
+*** WE NEED TO UPDATE DESIGN DOC SO IT DOESNT MENTION THE APIs WE DONT USE***
