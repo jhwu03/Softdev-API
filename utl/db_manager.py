@@ -104,7 +104,7 @@ def get_name_country_list():
     if ALPHA_LIST == []:
         database = sqlite3.connect(DB_FILE)
         cur = database.cursor()
-        cur.execute("SELECT alpha_2 FROM countries ORDER BY alpha_2;")
+        cur.execute("SELECT alpha_2 FROM countries ORDER BY name;")
         for row in cur.fetchall():
             if row[0] not in NOT_NAME:
                 ALPHA_LIST.append(row[0])

@@ -99,7 +99,7 @@ def home():
             response = "Please enter a name:"
         else:
             response = ""
-            name_stats = db_manager.get_name_stats(name, db_manager.get_alpha(country, 2))
+            name_stats = db_manager.get_name_stats(name, db_manager.get_alpha(country, "2"))
     country_list = db_manager.get_name_country_list()
     new_country_list = []
     for i in country_list:
